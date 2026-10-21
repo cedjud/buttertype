@@ -1,0 +1,58 @@
+/* BT Smör — design tokens + font plumbing. Paths are relative to this file. */
+@font-face {
+  font-family: "BT Smör";
+  src: url("../fonts/BTSmor.woff2") format("woff2"),
+       url("../fonts/BTSmor-Variable.ttf") format("truetype");
+  font-display: block;           /* never show a fallback flash for display type */
+}
+
+/* Registering the axes as typed numbers lets CSS *transition* them (hover-to-melt). */
+@property --m { syntax: "<number>"; inherits: true; initial-value: 0;   }  /* MELT */
+@property --b { syntax: "<number>"; inherits: true; initial-value: 100; }  /* BUBL */
+@property --s { syntax: "<number>"; inherits: true; initial-value: 100; }  /* SLMP */
+
+:root {
+  --black: #0A0A0A;
+  --yellow: #FFD21F;
+  --white: #FFFFFF;
+  --guide-on-yellow: rgba(10,10,10,.22);
+  --row-line-on-black: rgba(255,210,31,.35);
+
+  --font-display: "BT Smör", "Arial Black", Impact, system-ui, sans-serif;
+  --font-body: "Familjen Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "DM Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --nav-h: 56px;
+  --gutter: 20px;                 /* mobile */
+}
+@media (min-width: 640px)  { :root { --gutter: 24px; } }
+@media (min-width: 1024px) { :root { --gutter: 28px; } }
+
+/* Display type. Set --m / --b / --s on the element (or an ancestor) to drive the axes. */
+.bt {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-variation-settings: "MELT" var(--m), "BUBL" var(--b), "SLMP" var(--s);
+  font-feature-settings: var(--ff, normal);        /* e.g. --ff: "ss01", "ss02" */
+}
+.bt-hover { transition: --m .8s cubic-bezier(.2,.8,.2,1); }
+.bt-hover:hover, .bt-hover:focus-visible { --m: 100; }
+
+/* Presets */
+.melt-solid  { --m: 0;   --b: 100; --s: 100; }
+.melt-soft   { --m: 33;  --b: 100; --s: 100; }
+.melt-gooey  { --m: 66;  --b: 100; --s: 100; }
+.melt-puddle { --m: 100; --b: 100; --s: 100; }
+.melt-calm   { --m: 100; --b: 40;  --s: 20;  }
+.melt-pan    { --m: 100; --b: 100; --s: 0;   }
+
+/* Labels (small mono caps) */
+.label { font: 400 12px/1.5 var(--font-mono); letter-spacing: .09em; text-transform: uppercase; }
+
+/* Hairline rules */
+.rule-b { border-bottom: 1px solid currentColor; }
+.rule-r { border-right: 1px solid currentColor; }
+.rule-t { border-top: 1px solid currentColor; }
+
+/* Giant specimen lines need room for drips/puddle below and bubbles above at high MELT. */
+.specimen { line-height: .95; padding-bottom: .08em; overflow: visible; white-space: nowrap; }

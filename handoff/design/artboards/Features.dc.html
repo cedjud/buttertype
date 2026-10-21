@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>BT Smör features</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Familjen+Grotesk:wght@400;500;600;700&display=swap">
+<style>
+@font-face{font-family:"BT Smör";src:url(/_blob/15c80a26168368d082474370359a4c47) format("woff2")}
+body{margin:0}
+</style>
+</helmet>
+<div style="width:1440px;height:1000px;box-sizing:border-box;background:#FFD21F;color:#0A0A0A;font-family:'Familjen Grotesk',system-ui,sans-serif;display:flex;flex-direction:column;overflow:hidden">
+<div style="flex:none;display:grid;grid-template-columns:repeat(12, minmax(0, 1fr));border-bottom:1px solid #0A0A0A"><div style="grid-column:span 8;padding:26px 28px 22px;border-right:1px solid #0A0A0A"><div style="font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.09em;text-transform:uppercase;margin-bottom:14px">05 — OpenType features</div><h2 style="margin:0;font-family:'BT Smör',sans-serif;font-weight:400;font-size:91px;line-height:1;font-variation-settings:'MELT' 0">Two sets of tricks.</h2></div><p style="grid-column:span 4;margin:0;padding:26px 28px;font-size:19px;line-height:1.4;display:flex;align-items:flex-end">Stylistic sets for the way you like your a, and your dots. Same text, four ways.</p></div><div style="flex:1;min-height:0;display:flex;flex-direction:column;border-top:0"><div style="flex:1;min-height:0;display:grid;grid-template-columns:260px minmax(0, 1fr);border-bottom:1px solid #0A0A0A"><div style="padding:22px 28px;border-right:1px solid #0A0A0A;display:flex;flex-direction:column;justify-content:space-between"><span style="align-self:flex-start;background:#0A0A0A;color:#FFD21F;padding:5px 12px;font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase">Default</span><span style="font-size:16px;line-height:1.35">Single-storey a, round dots.</span></div><div style="display:flex;align-items:center;padding:0 30px;overflow:hidden"><div style="font-family:'BT Smör',sans-serif;font-weight:400;font-size:107px;line-height:1.1;white-space:nowrap;padding-bottom:8px;font-feature-settings:normal;font-variation-settings:'MELT' {{melt}},'BUBL' 100,'SLMP' 100">Dagbladet? Hei, Åre!</div></div></div><div style="flex:1;min-height:0;display:grid;grid-template-columns:260px minmax(0, 1fr);border-bottom:1px solid #0A0A0A"><div style="padding:22px 28px;border-right:1px solid #0A0A0A;display:flex;flex-direction:column;justify-content:space-between"><span style="align-self:flex-start;background:#0A0A0A;color:#FFD21F;padding:5px 12px;font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase">ss01</span><span style="font-size:16px;line-height:1.35">Double-storey a for a, å and ä.</span></div><div style="display:flex;align-items:center;padding:0 30px;overflow:hidden"><div style="font-family:'BT Smör',sans-serif;font-weight:400;font-size:107px;line-height:1.1;white-space:nowrap;padding-bottom:8px;font-feature-settings:'ss01';font-variation-settings:'MELT' {{melt}},'BUBL' 100,'SLMP' 100">Dagbladet? Hei, Åre!</div></div></div><div style="flex:1;min-height:0;display:grid;grid-template-columns:260px minmax(0, 1fr);border-bottom:1px solid #0A0A0A"><div style="padding:22px 28px;border-right:1px solid #0A0A0A;display:flex;flex-direction:column;justify-content:space-between"><span style="align-self:flex-start;background:#0A0A0A;color:#FFD21F;padding:5px 12px;font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase">ss02</span><span style="font-size:16px;line-height:1.35">Square dots on i, j, ä, ö and . , : ; ! ?</span></div><div style="display:flex;align-items:center;padding:0 30px;overflow:hidden"><div style="font-family:'BT Smör',sans-serif;font-weight:400;font-size:107px;line-height:1.1;white-space:nowrap;padding-bottom:8px;font-feature-settings:'ss02';font-variation-settings:'MELT' {{melt}},'BUBL' 100,'SLMP' 100">Dagbladet? Hei, Åre!</div></div></div><div style="flex:1;min-height:0;display:grid;grid-template-columns:260px minmax(0, 1fr);border-bottom:1px solid #0A0A0A"><div style="padding:22px 28px;border-right:1px solid #0A0A0A;display:flex;flex-direction:column;justify-content:space-between"><span style="align-self:flex-start;background:#0A0A0A;color:#FFD21F;padding:5px 12px;font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase">ss01 + ss02</span><span style="font-size:16px;line-height:1.35">Both, together.</span></div><div style="display:flex;align-items:center;padding:0 30px;overflow:hidden"><div style="font-family:'BT Smör',sans-serif;font-weight:400;font-size:107px;line-height:1.1;white-space:nowrap;padding-bottom:8px;font-feature-settings:'ss01','ss02';font-variation-settings:'MELT' {{melt}},'BUBL' 100,'SLMP' 100">Dagbladet? Hei, Åre!</div></div></div></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1000},"melt":{"editor":"range","default":0,"min":0,"max":100,"step":1,"section":"Heat all rows"}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return { melt: this.props.melt ?? 0 };
+  }
+}
+</script>
+</body>
+</html>

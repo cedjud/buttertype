@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<title>BT Smör in use mobile</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Familjen+Grotesk:wght@400;500;600;700&display=swap">
+<style>
+@font-face{font-family:"BT Smör";src:url(/_blob/15c80a26168368d082474370359a4c47) format("woff2")}
+body{margin:0}
+</style>
+</helmet>
+<div style="width:390px;height:2450px;box-sizing:border-box;background:#FFFFFF;color:#0A0A0A;font-family:'Familjen Grotesk',system-ui,sans-serif;display:flex;flex-direction:column;overflow:hidden">
+  <div style="height:250px;flex:none;box-sizing:border-box;padding:22px 20px;border-bottom:1px solid #0A0A0A;display:flex;flex-direction:column;justify-content:space-between">
+    <div style="font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.09em;text-transform:uppercase">08 — In the wild</div>
+    <h2 style="margin:0;font-family:'BT Smör',sans-serif;font-weight:400;font-size:96px;line-height:.95;font-variation-settings:'MELT' 0">Tap to<br>melt.</h2>
+  </div>
+  <div style="height:470px;flex:none;display:flex;flex-direction:column;border-bottom:1px solid #0A0A0A">
+    <div style="flex:1;background:#FFD21F;padding:24px 20px;display:flex;flex-direction:column;justify-content:space-between">
+      <div style="display:flex;justify-content:space-between;font-family:'DM Mono',monospace;font-weight:500;font-size:12px;letter-spacing:.06em;text-transform:uppercase"><span>Usaltet</span><span>Netto 250 g</span></div>
+      <div style="text-align:center;font-family:'BT Smör',sans-serif;font-size:126px;line-height:1;font-variation-settings:'MELT' 0">Smør</div>
+      <div style="height:1px"></div>
+    </div>
+    <div style="height:72px;flex:none;background:#0A0A0A;color:#FFD21F;padding:0 20px;display:flex;justify-content:space-between;align-items:center;font-family:'DM Mono',monospace;font-weight:500;font-size:12px;letter-spacing:.06em;text-transform:uppercase"><span>Kjøles</span><span>Unsalted butter</span></div>
+  </div>
+  <div style="height:580px;flex:none;box-sizing:border-box;background:#0A0A0A;color:#FFD21F;padding:24px 20px;display:flex;flex-direction:column;justify-content:space-between;border-bottom:1px solid #FFD21F">
+    <div style="display:flex;justify-content:space-between;font-family:'DM Mono',monospace;font-weight:500;font-size:12px;letter-spacing:.07em;text-transform:uppercase"><span>Utstilling</span><span>Oslo · August 2026</span></div>
+    <div style="font-family:'BT Smör',sans-serif;line-height:.92">
+      <div style="font-size:130px;font-variation-settings:'MELT' 0">Smør</div>
+      <div style="font-size:88px;font-variation-settings:'MELT' 34">smelter</div>
+      <div style="font-size:130px;font-variation-settings:'MELT' 68">på</div>
+      <div style="font-size:64px;font-variation-settings:'MELT' 100">brødskiva</div>
+    </div>
+    <div style="display:flex;justify-content:space-between;font-family:'DM Mono',monospace;font-weight:500;font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:#FFFFFF"><span>Tap to heat</span><span>↓</span></div>
+  </div>
+  <div style="height:560px;flex:none;box-sizing:border-box;background:#FFFFFF;padding:24px 20px;display:flex;flex-direction:column;gap:22px;border-bottom:1px solid #0A0A0A">
+    <div style="font-family:'BT Smör',sans-serif;font-size:128px;line-height:.9;font-feature-settings:'ss01';font-variation-settings:'MELT' 0">Meny</div>
+    <div style="border-top:2px solid #0A0A0A;padding-top:14px;display:flex;flex-direction:column;gap:14px">
+      <sc-for list="{{menu}}" as="it" hint-placeholder-count="4">
+        <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:12px;border-bottom:1px solid #0A0A0A;padding-bottom:12px"><span style="{{it.style}}">{{it.name}}</span><span style="font-family:'DM Mono',monospace;font-size:14px">{{it.price}}</span></div>
+      </sc-for>
+    </div>
+  </div>
+  <div style="height:585px;flex:none;display:grid;grid-template-columns:repeat(2, minmax(0, 1fr));grid-template-rows:repeat(3, minmax(0, 1fr))">
+    <sc-for list="{{stickers}}" as="sk" hint-placeholder-count="6">
+      <div style="display:flex;align-items:center;justify-content:center;border-right:1px solid #0A0A0A;border-bottom:1px solid #0A0A0A"><div style="{{sk.style}}">{{sk.text}}</div></div>
+    </sc-for>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":2450}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const mn = (ss) => "font-family:'BT Smör',sans-serif;font-size:32px;line-height:1;font-variation-settings:'MELT' 0" + (ss ? ";font-feature-settings:'ss01'" : "");
+    const sk = (bg, fg, size) => "width:150px;height:150px;flex:none;border-radius:50%;border:2px solid #0A0A0A;display:flex;align-items:center;justify-content:center;text-align:center;background:" + bg + ";color:" + fg + ";font-family:'BT Smör',sans-serif;font-size:" + size + "px;line-height:.95;font-variation-settings:'MELT' 0";
+    return {
+      menu: [
+        { name: 'Smørbrød', price: '129,–', style: mn(true) },
+        { name: 'Brunost', price: '49,–', style: mn(false) },
+        { name: 'Rømmegrøt', price: '119,–', style: mn(true) },
+        { name: 'Lefse', price: '39,–', style: mn(false) }
+      ],
+      stickers: [
+        { text: '100% Smør', style: sk('#FFD21F', '#0A0A0A', 34) },
+        { text: 'Æ Ø Å', style: sk('#0A0A0A', '#FFD21F', 36) },
+        { text: 'Melt me', style: sk('#FFFFFF', '#0A0A0A', 38) },
+        { text: 'Varm!', style: sk('#FFD21F', '#0A0A0A', 40) },
+        { text: 'Smør', style: sk('#0A0A0A', '#FFFFFF', 44) },
+        { text: 'Brunost', style: sk('#FFFFFF', '#0A0A0A', 30) }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

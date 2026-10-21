@@ -1,0 +1,117 @@
+.melt {
+  --cols: var(--meta-col) minmax(0, 1fr) 380px;
+  background: var(--black);
+  color: var(--yellow);
+}
+
+.onlyMobile { display: none; }
+
+/* ---------- header row ---------- */
+.head {
+  display: grid;
+  grid-template-columns: var(--cols);
+  border-bottom: 1px solid var(--yellow);
+  font: 400 12px/1.5 var(--font-mono);
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+.headCell { padding: 18px var(--gutter); border-right: 1px solid var(--yellow); font: inherit; }
+.headEnd { border-right: 0; color: var(--white); }
+
+/* ---------- stage rows ---------- */
+.rows { margin: 0; padding: 0; list-style: none; }
+
+.row {
+  display: grid;
+  grid-template-columns: var(--cols);
+  min-height: 246px;
+  border-bottom: 1px solid var(--yellow);
+}
+
+.meta {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 22px var(--gutter);
+  border-right: 1px solid var(--yellow);
+  font: 400 12px/1.5 var(--font-mono);
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+.name {
+  font-size: 44px;
+  line-height: 1;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--white);
+}
+
+.specimen {
+  container-type: inline-size;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  padding: 0 var(--gutter);
+  border-right: 1px solid var(--yellow);
+}
+/* "Smør" measures 2.64→2.77em; size from the cell so it never overflows. */
+.word {
+  font-size: min(12.22vw, 100cqi / 2.85);
+  line-height: 1;
+  padding-bottom: 8px;
+}
+
+.text {
+  display: flex;
+  align-items: flex-end;
+  padding: 22px var(--gutter);
+  font-size: 18px;
+  line-height: 1.4;
+  color: var(--white);
+}
+.text span { display: contents; }
+.text .onlyMobile { display: none; }
+
+/* ---------- tablet ---------- */
+@media (max-width: 1023px) {
+  .melt { --cols: var(--meta-col) minmax(0, 1fr); }
+  .headCell { display: flex; align-items: center; min-height: 52px; padding: 0 24px; }
+  .headMid { border-right: 0; color: var(--white); }
+  .headEnd { display: none; }
+
+  .row {
+    grid-template-rows: 190px auto;
+    grid-template-areas: "meta spec" "meta text";
+    min-height: 0;
+  }
+  .meta { grid-area: meta; padding: 20px 24px; }
+  .name { font-size: 42px; }
+  .specimen { grid-area: spec; padding: 0 24px; border-right: 0; border-bottom: 1px solid var(--yellow); }
+  .word { font-size: min(21.6vw, 100cqi / 2.85); }
+  .text { grid-area: text; align-items: flex-start; padding: 16px 24px 24px; font-size: 17px; }
+}
+
+/* ---------- mobile ---------- */
+@media (max-width: 639px) {
+  .notMobile, .text .notMobile { display: none; }
+  .onlyMobile, .text .onlyMobile { display: contents; }
+
+  .head { display: flex; justify-content: space-between; align-items: center; height: 52px; padding: 0 20px; }
+  .headCell { min-height: 0; padding: 0; border: 0; }
+
+  .row { display: flex; flex-direction: column; }
+  .meta {
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    height: 52px;
+    padding: 0 20px;
+    border-right: 0;
+    border-bottom: 1px solid var(--yellow);
+  }
+  .name { font-size: 30px; margin-right: auto; }
+  .specimen { height: 180px; padding: 0 20px; }
+  .word { font-size: min(30.8vw, 100cqi / 2.85); }
+  .text { padding: 16px 20px 24px; font-size: 16px; }
+}

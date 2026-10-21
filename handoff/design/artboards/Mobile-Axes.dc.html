@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Three axes mobile</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Familjen+Grotesk:wght@400;500;600;700&display=swap">
+<style>
+@font-face{font-family:"BT Smör";src:url(/_blob/15c80a26168368d082474370359a4c47) format("woff2")}
+body{margin:0}
+</style>
+</helmet>
+<div style="width:390px;height:1740px;box-sizing:border-box;background:#FFFFFF;color:#0A0A0A;font-family:'Familjen Grotesk',system-ui,sans-serif;display:flex;flex-direction:column;overflow:hidden">
+  <div style="height:372px;flex:none;box-sizing:border-box;padding:22px 20px;border-bottom:1px solid #0A0A0A;display:flex;flex-direction:column;justify-content:space-between">
+    <div style="font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.09em;text-transform:uppercase">03 — Three axes, one block of butter</div>
+    <h2 style="margin:0;font-family:'BT Smör',sans-serif;font-weight:400;font-size:100px;line-height:.95;font-variation-settings:'MELT' 0">Dial it<br>in.</h2>
+    <p style="margin:0;font-size:17px;line-height:1.4">Every letter is built from overlapping strokes, so the font morphs between a crisp, sharp-cornered face and a bubbling puddle.</p>
+  </div>
+  <sc-for list="{{axes}}" as="ax" hint-placeholder-count="3">
+    <div style="flex:1;min-height:0;display:flex;flex-direction:column;border-bottom:1px solid #0A0A0A">
+      <div style="height:64px;flex:none;box-sizing:border-box;padding:0 20px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #0A0A0A">
+        <span style="font-family:'BT Smör',sans-serif;font-size:44px;line-height:1">{{ax.tag}}</span>
+        <span style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;text-align:right;line-height:1.5;white-space:pre-line">{{ax.range}}</span>
+      </div>
+      <div style="height:220px;flex:none;display:flex;align-items:center;justify-content:center;background:{{ax.bg}};color:{{ax.fg}};overflow:hidden;padding:0 0 16px">
+        <div style="{{ax.wordStyle}}">Smør</div>
+      </div>
+      <div style="height:96px;flex:none;box-sizing:border-box;padding:16px 20px 0;font-size:15px;line-height:1.4;border-top:1px solid #0A0A0A">{{ax.text}}</div>
+      <div style="flex:1;padding:6px 20px 0">
+        <div style="display:flex;justify-content:space-between;font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:12px"><span>0</span><span style="font-size:18px;letter-spacing:0">{{ax.value}}</span><span>100</span></div>
+        <div style="height:2px;background:#0A0A0A;position:relative"><div style="position:absolute;top:-9px;left:{{ax.pos}}%;width:20px;height:20px;margin-left:-10px;background:#FFD21F;border:2px solid #0A0A0A"></div></div>
+      </div>
+    </div>
+  </sc-for>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1740}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const ws = (m, b, s) => "font-family:'BT Smör',sans-serif;font-weight:400;font-size:120px;line-height:1;white-space:nowrap;font-variation-settings:'MELT' " + m + ",'BUBL' " + b + ",'SLMP' " + s;
+    return { axes: [
+      { tag: 'MELT', range: 'Meltiness\n0–100 · default 0', bg: '#FFD21F', fg: '#0A0A0A', value: 70, pos: 70, wordStyle: ws(70, 100, 100), text: 'From razor-sharp corners to a full puddle. Terminals round off, drips form, letters sink.' },
+      { tag: 'BUBL', range: 'Bubbles\n0–100 · default 100', bg: '#0A0A0A', fg: '#FFD21F', value: 100, pos: 100, wordStyle: ws(100, 100, 100), text: 'Foam on the puddle, bubbles rising, tiny pan-sizzle droplets. Shown at MELT 100.' },
+      { tag: 'SLMP', range: 'Slump\n0–100 · default 100', bg: '#FFFFFF', fg: '#0A0A0A', value: 20, pos: 20, wordStyle: ws(100, 40, 20), text: 'How far the letters lean, droop and sink. Dial it down and a melted line stays readable.' }
+    ] };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,921 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BT Smör — the typeface that melts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Familjen+Grotesk:wght@400;500;600;700&display=swap">
+<style>
+@font-face{font-family:"BT Smör";src:url(data:font/woff2;base64,__FONT__) format("woff2");font-display:block}
+@property --m{syntax:"<number>";inherits:true;initial-value:0}
+@property --b{syntax:"<number>";inherits:true;initial-value:100}
+@property --s{syntax:"<number>";inherits:true;initial-value:100}
+
+:root{
+  --butter:#FFD21F;--hot:#FF4B1F;--cobalt:#2335FF;--ink:#140D00;--cream:#FFF5D6;--pink:#FFB8D4;
+  --paper:#FFF5D6;--text:#140D00;--nav-bg:rgba(255,245,214,.9);--nav-line:#140D00;
+  --ui:"Familjen Grotesk",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --mono:"DM Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --bt:"BT Smör","Arial Black",Impact,system-ui,sans-serif;
+  --nav-h:60px;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){--paper:#140D00;--text:#FFF5D6;--nav-bg:rgba(20,13,0,.9);--nav-line:#FFF5D6}
+}
+:root[data-theme="dark"]{--paper:#140D00;--text:#FFF5D6;--nav-bg:rgba(20,13,0,.9);--nav-line:#FFF5D6}
+html{scroll-padding-top:calc(var(--nav-h) + env(safe-area-inset-top,0px));scroll-behavior:smooth;overflow-x:clip}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--text);font-family:var(--ui);font-size:17px;line-height:1.5;overflow-x:clip;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--nav-bg);z-index:60}
+img,svg{max-width:100%}
+a{color:inherit}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--cobalt);outline-offset:3px}
+.sec :focus-visible{outline-color:currentColor}
+
+/* ---------- the font ---------- */
+.bt{font-family:var(--bt);font-weight:400;font-variation-settings:"MELT" var(--m),"BUBL" var(--b),"SLMP" var(--s);font-feature-settings:var(--f,normal);font-kerning:normal}
+.hov{transition:--m .8s cubic-bezier(.2,.8,.2,1)}
+.hov:hover,.hov:focus-visible{--m:100}
+
+/* ---------- shared ---------- */
+.wrap{max-width:1360px;margin:0 auto;padding:0 clamp(18px,4vw,56px)}
+.sec{position:relative;background:var(--bg,var(--paper));color:var(--fg,var(--text))}
+.label{font:500 12px/1.2 var(--mono);letter-spacing:.09em;text-transform:uppercase}
+.mono{font-family:var(--mono)}
+.h2{font-size:clamp(46px,9vw,140px);line-height:.98;margin:0;letter-spacing:-.01em}
+.lede{font-size:clamp(18px,1.7vw,24px);line-height:1.4;max-width:46ch;margin:0}
+.pad{padding:clamp(70px,11vw,160px) 0}
+.btn{display:inline-flex;align-items:center;gap:.6em;padding:.8em 1.3em;border:2px solid currentColor;border-radius:999px;background:transparent;text-decoration:none;font-weight:600;cursor:pointer;transition:transform .2s,background .2s,color .2s;min-height:44px}
+.btn:hover{transform:translateY(-2px) rotate(-1deg)}
+.btn.solid{background:var(--ink);color:var(--butter);border-color:var(--ink)}
+.btn.solid:hover{background:var(--hot);color:var(--ink)}
+.chip{display:inline-flex;align-items:center;gap:.5em;border:2px solid currentColor;border-radius:999px;padding:.25em .8em;font:500 12px/1.3 var(--mono);letter-spacing:.06em;text-transform:uppercase;background:transparent;cursor:pointer}
+.chip[aria-pressed="true"]{background:currentColor}
+.chip[aria-pressed="true"] > span{color:var(--bg)}
+.js .rise{opacity:0;transform:translateY(40px);transition:opacity .8s cubic-bezier(.2,.8,.2,1),transform .8s cubic-bezier(.2,.8,.2,1)}
+.js .rise.in{opacity:1;transform:none}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:28px;background:transparent;cursor:pointer;margin:0}
+input[type=range]::-webkit-slider-runnable-track{height:6px;border-radius:6px;background:currentColor;opacity:.9}
+input[type=range]::-moz-range-track{height:6px;border-radius:6px;background:currentColor}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;margin-top:-10px;border-radius:50%;background:var(--thumb,var(--hot));border:3px solid var(--ink);box-shadow:0 2px 0 var(--ink)}
+input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--thumb,var(--hot));border:3px solid var(--ink)}
+
+/* ---------- nav ---------- */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;height:var(--nav-h);display:flex;align-items:center;gap:clamp(12px,2.5vw,36px);padding:0 clamp(18px,4vw,56px);background:var(--nav-bg);color:var(--text);border-bottom:2px solid var(--nav-line);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.logo{font-size:30px;line-height:1;text-decoration:none;flex:none}
+.links{display:flex;gap:4px;margin-left:auto;overflow-x:auto;scrollbar-width:none}
+.links::-webkit-scrollbar{display:none}
+.links a{padding:.4em .8em;border-radius:999px;text-decoration:none;font:500 13px/1.2 var(--mono);letter-spacing:.04em;text-transform:uppercase;white-space:nowrap;transition:background .2s}
+.links a:hover{background:rgba(127,127,127,.2)}
+.links a.on{background:var(--ink);color:var(--butter)}
+:root[data-theme="dark"] .links a.on{background:var(--butter);color:var(--ink)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .links a.on{background:var(--butter);color:var(--ink)}}
+.nav .cta{flex:none;padding:.45em 1em;min-height:0;background:var(--hot);border-color:var(--ink);color:var(--ink);font-size:14px}
+.nav .bar{position:absolute;left:0;bottom:-2px;height:5px;width:calc(var(--prog,0) * 100%);background:linear-gradient(90deg,var(--butter),var(--hot))}
+@media (max-width:860px){.nav .cta{display:none}}
+
+/* ---------- hero ---------- */
+.hero{height:340vh;background:var(--hero-bg,var(--butter));color:var(--ink)}
+.pin{position:sticky;top:calc(var(--nav-h) + env(safe-area-inset-top,0px));height:calc(100vh - var(--nav-h));height:calc(100svh - var(--nav-h));overflow:hidden}
+.hero .pin{display:flex;flex-direction:column;justify-content:space-between;padding:clamp(14px,2vw,26px) clamp(18px,4vw,56px)}
+.hero-top,.hero-bot{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;position:relative;z-index:2}
+.hero-mid{flex:1;display:grid;place-items:center;position:relative}
+.hero-word{margin:0;font-size:min(20.5vw,48vh);line-height:.9;white-space:nowrap;text-align:center;position:relative;z-index:2;user-select:none}
+.readout{font:500 clamp(13px,1.4vw,16px)/1.3 var(--mono);text-transform:uppercase;letter-spacing:.06em;text-align:right}
+.readout b{font-size:1.6em;display:block;letter-spacing:0}
+.hero-copy{max-width:52ch;font-size:clamp(16px,1.5vw,21px);line-height:1.35;margin:0}
+.scrollhint{display:inline-flex;align-items:center;gap:.6em}
+.scrollhint i{display:block;width:2px;height:34px;background:currentColor;position:relative;overflow:hidden}
+.scrollhint i::after{content:"";position:absolute;left:0;top:-50%;width:100%;height:50%;background:var(--hot);animation:drip 1.6s ease-in infinite}
+@keyframes drip{to{top:110%}}
+.bubbles{position:absolute;inset:0;pointer-events:none;z-index:1}
+.bub{position:absolute;border:2px solid var(--ink);border-radius:50%;will-change:transform,opacity;opacity:0}
+.bub::after{content:"";position:absolute;left:18%;top:16%;width:22%;height:22%;border-radius:50%;background:var(--ink);opacity:.5}
+
+/* ---------- marquee ---------- */
+.marq{background:var(--ink);color:var(--butter);overflow:hidden;white-space:nowrap;padding:.15em 0 .45em;border-block:3px solid var(--ink)}
+.marq.alt{background:var(--butter);color:var(--ink)}
+.marq .track{display:inline-flex;will-change:transform}
+.marq span{font-size:clamp(60px,12vw,190px);line-height:1.15;padding-right:.5em}
+.marq .tag{position:absolute}
+
+/* ---------- statement ---------- */
+.statement .big{font-size:clamp(34px,6.4vw,100px);line-height:1.02;margin:0;max-width:19ch;letter-spacing:-.005em}
+.statement .big span{opacity:.18;transition:opacity .15s}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:clamp(50px,7vw,110px);border-top:3px solid var(--butter)}
+.stat{padding:22px 18px 0 0}
+.stat+.stat{padding-left:18px;border-left:3px solid var(--butter)}
+.stat b{display:block;font-size:clamp(54px,8.5vw,130px);line-height:1}
+.stat span{font:500 13px/1.3 var(--mono);text-transform:uppercase;letter-spacing:.07em}
+@media (max-width:700px){.stats{grid-template-columns:1fr 1fr}.stat:nth-child(3){border-left:0;padding-left:0}.stat:nth-child(n+3){border-top:3px solid var(--butter);margin-top:20px}}
+
+/* ---------- melt story ---------- */
+.story{height:560vh;--bg:var(--ink);--fg:var(--butter)}
+.story .pin{background:
+  radial-gradient(120% 70% at 50% 108%,rgba(255,75,31,calc(var(--heat,0)*.95)),transparent 62%),
+  radial-gradient(60% 40% at 50% 100%,rgba(255,210,31,calc(var(--heat,0)*.9)),transparent 70%),var(--ink);
+  display:grid;grid-template-rows:auto 1fr auto;padding:clamp(14px,2vw,26px) clamp(18px,4vw,56px)}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.tab{border:2px solid var(--butter);border-radius:999px;padding:.35em 1em;font:500 13px/1.2 var(--mono);text-transform:uppercase;letter-spacing:.06em;background:transparent;color:var(--butter);cursor:pointer;min-height:40px}
+.tab.on{background:var(--butter);color:var(--ink)}
+.story-mid{display:grid;place-items:center;position:relative;min-height:0}
+.story-word{font-size:min(29vw,50vh);line-height:.95;margin:0;position:relative;z-index:2}
+.story-foot{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(16px,3vw,48px);align-items:end;position:relative;z-index:2}
+.copy-stack{position:relative;min-height:9.5em}
+.copy{position:absolute;inset:0;opacity:0;transform:translateY(14px);transition:opacity .4s,transform .4s}
+.copy.on{opacity:1;transform:none}
+.copy h3{font-size:clamp(26px,3vw,44px);margin:0 0 .25em;line-height:1}
+.copy p{margin:0;max-width:44ch;font-size:clamp(15px,1.3vw,19px);line-height:1.4}
+.lab{display:flex;gap:10px;justify-content:flex-end;align-items:flex-end}
+.lab figure{margin:0;text-align:center}
+.lab .tile{width:clamp(56px,8.5vw,120px);aspect-ratio:1;border:2px solid var(--butter);border-radius:12px;display:grid;place-items:center;font-size:clamp(40px,6vw,86px);line-height:1;background:rgba(255,255,255,.04);overflow:hidden}
+.lab figcaption{font:500 10px/1.3 var(--mono);text-transform:uppercase;letter-spacing:.08em;margin-top:6px;opacity:.85}
+.gauge{position:absolute;right:clamp(10px,2vw,28px);top:20%;bottom:20%;width:10px;border:2px solid var(--butter);border-radius:10px;z-index:3;overflow:hidden}
+.gauge i{position:absolute;left:0;right:0;bottom:0;height:calc(var(--heat,0)*100%);background:linear-gradient(0deg,var(--hot),var(--butter))}
+.sbub{position:absolute;border:2px solid var(--butter);border-radius:50%;bottom:-10%;opacity:0;animation:rise linear infinite}
+@keyframes rise{0%{transform:translateY(0) translateX(0)}50%{transform:translateY(-60vh) translateX(14px)}100%{transform:translateY(-120vh) translateX(-10px)}}
+@media (max-width:760px){.story-foot{grid-template-columns:1fr}.lab{justify-content:flex-start}.copy-stack{min-height:11em}.gauge{display:none}}
+
+/* ---------- axes ---------- */
+.axes{--bg:var(--cream);--fg:var(--ink)}
+.axes-head{display:grid;grid-template-columns:1.4fr 1fr;gap:30px;align-items:end;margin-bottom:clamp(36px,5vw,70px)}
+@media (max-width:860px){.axes-head{grid-template-columns:1fr}}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(12px,1.6vw,22px)}
+@media (max-width:980px){.cards{grid-template-columns:1fr}}
+.card{border:3px solid var(--ink);border-radius:26px;padding:clamp(18px,2vw,28px);display:flex;flex-direction:column;gap:14px;background:var(--cbg);color:var(--cfg);box-shadow:8px 8px 0 var(--ink);min-height:540px}
+.card .tagrow{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.card .tag{font-size:clamp(36px,4vw,56px);line-height:1}
+.card h3{margin:0;font-size:22px;line-height:1.1}
+.card p{margin:0;font-size:16px;line-height:1.4}
+.demo{flex:1;display:grid;place-items:center;border:2px solid currentColor;border-radius:16px;min-height:200px;overflow:hidden;padding:10px 0 20px}
+.demo .bt{font-size:clamp(78px,11vw,150px);line-height:1}
+.ctl{display:grid;gap:6px}
+.ctl .row{display:flex;justify-content:space-between;align-items:center;font:500 12px/1 var(--mono);text-transform:uppercase;letter-spacing:.06em}
+.ctl .val{font-size:22px;letter-spacing:0}
+.mini{border:2px solid currentColor;background:transparent;border-radius:999px;padding:.3em .9em;font:500 12px/1.2 var(--mono);text-transform:uppercase;cursor:pointer;min-height:34px}
+.mini:hover{background:var(--ink);color:var(--butter);border-color:var(--ink)}
+
+.play{margin-top:clamp(40px,6vw,90px);border:3px solid var(--ink);border-radius:30px;background:var(--cobalt);color:var(--butter);display:grid;grid-template-columns:minmax(260px,380px) 1fr;gap:clamp(16px,3vw,44px);padding:clamp(18px,3vw,40px);box-shadow:10px 10px 0 var(--ink)}
+@media (max-width:860px){.play{grid-template-columns:1fr}}
+.padwrap{display:grid;gap:12px;align-content:start}
+.xy{position:relative;aspect-ratio:1;border:3px solid var(--butter);border-radius:20px;touch-action:none;cursor:crosshair;background:
+  linear-gradient(var(--butter),var(--butter)) 50% 0/2px 100% no-repeat,
+  linear-gradient(var(--butter),var(--butter)) 0 50%/100% 2px no-repeat;background-blend-mode:normal;overflow:hidden}
+.xy::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at var(--px,50%) var(--py,50%),rgba(255,210,31,.35),transparent 55%)}
+.xy .h{position:absolute;width:30px;height:30px;margin:-15px 0 0 -15px;border-radius:50%;background:var(--hot);border:3px solid var(--ink);left:var(--px,50%);top:var(--py,50%);box-shadow:0 3px 0 var(--ink)}
+.xy .ax{position:absolute;font:500 11px/1 var(--mono);text-transform:uppercase;letter-spacing:.08em}
+.xy .ax.x{right:10px;bottom:8px}.xy .ax.y{left:10px;top:8px}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chips .chip{color:var(--butter)}
+.chips .chip[aria-pressed="true"]{background:var(--butter);color:var(--ink)}
+.play-out{display:grid;align-content:space-between;gap:16px;min-width:0}
+.play-sample{font-size:clamp(54px,9vw,150px);line-height:1;outline:none;overflow-wrap:anywhere;min-height:2.2em;display:flex;align-items:center}
+.pv{display:flex;gap:18px;flex-wrap:wrap;font:500 12px/1.3 var(--mono);text-transform:uppercase;letter-spacing:.06em}
+.pv b{font-size:20px;letter-spacing:0;margin-left:.3em}
+
+/* ---------- norway ---------- */
+.norge{--bg:var(--hot);--fg:var(--ink);height:520vh}
+.norge .pin{display:flex;align-items:center}
+.htrack{display:flex;align-items:center;height:100%;will-change:transform;padding-left:clamp(18px,4vw,56px)}
+.hp{flex:none;height:100%;display:flex;flex-direction:column;justify-content:center;padding:0 clamp(18px,3vw,50px)}
+.hp.intro{width:min(78vw,760px)}
+.hp.intro h2{margin-bottom:.4em}
+.hp.gl{width:min(78vw,920px);position:relative}
+.hp.gl:nth-child(5){width:min(92vw,1180px)}
+.hp.gl .g{font-size:min(62vh,54vw);line-height:.9;margin:0;text-align:center}
+.hp.gl .meta{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:3px solid var(--ink);padding-top:12px;font:500 13px/1.3 var(--mono);text-transform:uppercase;letter-spacing:.06em}
+.hp.gl .words{font-size:clamp(22px,3vw,40px);line-height:1.1}
+.hp.pan{width:min(86vw,1100px)}
+.hp.pan .bt{font-size:clamp(46px,8vw,120px);line-height:1.05}
+.hint{position:absolute;left:clamp(18px,4vw,56px);top:clamp(12px,1.6vw,22px);font:500 12px/1.3 var(--mono);text-transform:uppercase;letter-spacing:.08em;z-index:3;display:flex;gap:10px;align-items:center}
+.hint i{display:block;height:6px;width:min(36vw,280px);border:2px solid var(--ink);border-radius:6px;position:relative;overflow:hidden}
+.hint i::after{content:"";position:absolute;inset:0;width:calc(var(--hp,0)*100%);background:var(--ink)}
+
+/* ---------- features ---------- */
+.features{--bg:var(--pink);--fg:var(--ink)}
+.feat-head{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:end;margin-bottom:40px}
+@media (max-width:860px){.feat-head{grid-template-columns:1fr}}
+.featctl{display:grid;gap:14px;border:3px solid var(--ink);border-radius:20px;padding:18px;background:var(--cream)}
+.featctl input[type=text]{width:100%;border:3px solid var(--ink);border-radius:12px;padding:.6em .8em;background:#fff;color:var(--ink);font-size:20px;min-height:48px}
+.frows{border-top:3px solid var(--ink)}
+.frow{display:grid;grid-template-columns:minmax(150px,240px) 1fr;gap:20px;align-items:center;border-bottom:3px solid var(--ink);padding:14px 0;overflow:hidden}
+.frow .meta{display:grid;gap:4px}
+.frow .meta b{font:500 13px/1.2 var(--mono);text-transform:uppercase;letter-spacing:.06em;background:var(--ink);color:var(--pink);padding:.3em .7em;border-radius:999px;justify-self:start}
+.frow .meta span{font-size:15px;line-height:1.3}
+.frow .s{font-size:clamp(40px,7.2vw,112px);line-height:1.1;white-space:nowrap;will-change:transform}
+@media (max-width:760px){.frow{grid-template-columns:1fr}}
+
+/* ---------- glyphs ---------- */
+.glyphs{--bg:var(--cream);--fg:var(--ink)}
+.gl-layout{display:grid;grid-template-columns:minmax(300px,440px) 1fr;gap:clamp(20px,3vw,50px);align-items:start;margin-top:clamp(30px,4vw,60px)}
+@media (max-width:900px){.gl-layout{grid-template-columns:1fr}}
+.insp{position:sticky;top:calc(var(--nav-h) + env(safe-area-inset-top,0px) + 16px);border:3px solid var(--ink);border-radius:26px;background:var(--butter);padding:18px;box-shadow:8px 8px 0 var(--ink);display:grid;gap:12px}
+@media (max-width:900px){.insp{position:relative;top:0}}
+.insp .big{aspect-ratio:1.05;border:3px solid var(--ink);border-radius:16px;background:var(--cream);display:grid;place-items:center;overflow:hidden;font-size:clamp(150px,22vw,300px);line-height:1}
+.insp .info{display:flex;justify-content:space-between;gap:10px;font:500 13px/1.3 var(--mono);text-transform:uppercase;letter-spacing:.05em}
+.insp .nm{font-size:22px;line-height:1.1;font-weight:600;font-family:var(--ui);text-transform:none;letter-spacing:0}
+.insp .rg{display:grid;gap:2px}
+.insp .rg .row{display:flex;justify-content:space-between;font:500 12px/1 var(--mono);text-transform:uppercase;letter-spacing:.06em}
+.insp .tg{display:flex;gap:8px;flex-wrap:wrap}
+.insp .chip:disabled{opacity:.35;cursor:not-allowed}
+.ggroup{margin-bottom:28px}
+.ggroup h3{font:500 12px/1 var(--mono);text-transform:uppercase;letter-spacing:.09em;margin:0 0 10px}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(66px,1fr));gap:8px}
+.cell{aspect-ratio:1;border:2px solid var(--ink);border-radius:14px;background:#fff;color:var(--ink);cursor:pointer;display:grid;place-items:center;font-size:42px;line-height:1;padding:0;transition:transform .2s,background .2s,box-shadow .2s;overflow:hidden}
+.cell:hover{transform:translateY(-3px) rotate(-2deg);background:var(--butter);box-shadow:3px 3px 0 var(--ink)}
+.cell[aria-pressed="true"]{background:var(--ink);color:var(--butter)}
+
+/* ---------- tester ---------- */
+.tester{--bg:var(--ink);--fg:var(--cream)}
+.t-head{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap;margin-bottom:30px}
+.t-layout{display:grid;grid-template-columns:minmax(280px,360px) 1fr;gap:clamp(16px,2.5vw,36px);align-items:start}
+@media (max-width:960px){.t-layout{grid-template-columns:1fr}}
+.panel{border:2px solid var(--cream);border-radius:22px;padding:18px;display:grid;gap:16px;align-content:start}
+.panel .ctl .row{color:var(--cream)}
+.panel input[type=range]{color:var(--cream);--thumb:var(--butter)}
+.panel select{width:100%;background:transparent;border:2px solid var(--cream);border-radius:12px;padding:.55em .7em;min-height:44px;color:var(--cream)}
+.panel select option{color:#000}
+.seg{display:flex;border:2px solid var(--cream);border-radius:999px;overflow:hidden}
+.seg button{flex:1;background:transparent;border:0;padding:.5em;cursor:pointer;font:500 12px/1 var(--mono);text-transform:uppercase;min-height:40px;color:var(--cream)}
+.seg button[aria-pressed="true"]{background:var(--cream);color:var(--ink)}
+.swatches{display:flex;gap:8px;flex-wrap:wrap}
+.sw{width:42px;height:42px;border-radius:50%;border:3px solid var(--cream);cursor:pointer;padding:0;position:relative;overflow:hidden}
+.sw::after{content:"";position:absolute;inset:50% 0 0 0;background:var(--c2)}
+.sw[aria-pressed="true"]{outline:3px solid var(--butter);outline-offset:2px}
+.tog{display:flex;gap:8px;flex-wrap:wrap}
+.panel .chip{color:var(--cream)}
+.panel .chip[aria-pressed="true"]{background:var(--butter);color:var(--ink);border-color:var(--butter)}
+.stage{border-radius:26px;padding:clamp(18px,3vw,44px);min-height:min(76vh,720px);background:var(--sb,var(--butter));color:var(--sf,var(--ink));display:flex;flex-direction:column;justify-content:space-between;gap:20px;transition:background .3s,color .3s;overflow:hidden}
+.tout{outline:none;min-height:3em;overflow-wrap:anywhere;font-size:120px;line-height:1.05;letter-spacing:0}
+.code{font:500 12px/1.6 var(--mono);white-space:pre-wrap;margin:0;opacity:.85;border-top:2px solid currentColor;padding-top:12px}
+.stagebar{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font:500 12px/1.3 var(--mono);text-transform:uppercase;letter-spacing:.06em}
+
+/* ---------- in use ---------- */
+.inuse{--bg:var(--butter);--fg:var(--ink);overflow:hidden}
+.mocks{display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(14px,2vw,28px);margin-top:clamp(30px,4vw,60px);align-items:start}
+.mock{border:3px solid var(--ink);border-radius:24px;overflow:hidden;box-shadow:8px 8px 0 var(--ink);will-change:transform;container-type:inline-size;position:relative}
+.m-wrap{grid-column:span 4;aspect-ratio:4/5.2;background:var(--butter-2,#FFE56E);display:flex;flex-direction:column;justify-content:space-between;padding:7cqw;background:linear-gradient(0deg,var(--cobalt) 0 17%,#FFE56E 17%)}
+.m-poster{grid-column:span 4;aspect-ratio:3/4.2;background:var(--cobalt);color:var(--butter);padding:7cqw;display:flex;flex-direction:column;justify-content:space-between}
+.m-menu{grid-column:span 4;background:var(--cream);padding:8cqw;aspect-ratio:3/4.2;display:flex;flex-direction:column;gap:3cqw}
+.m-stick{grid-column:span 12;display:flex;gap:clamp(10px,2vw,30px);padding:clamp(20px,3vw,44px);background:var(--pink);flex-wrap:wrap;justify-content:space-around;align-items:center}
+@media (max-width:980px){.m-wrap,.m-poster,.m-menu{grid-column:span 12;max-width:520px;margin-inline:auto;width:100%}}
+.m-wrap .top,.m-wrap .bot{display:flex;justify-content:space-between;font:600 3.6cqw/1.2 var(--mono);text-transform:uppercase;letter-spacing:.06em}
+.m-wrap .bot{color:var(--butter)}
+.m-wrap .name{font-size:44cqw;line-height:.82;text-align:center;margin-top:-4cqw}
+.m-poster .lines div{font-size:26cqw;line-height:.88}
+.m-poster .small{font:600 3.8cqw/1.3 var(--mono);text-transform:uppercase;letter-spacing:.07em;display:flex;justify-content:space-between}
+.m-menu h4{margin:0;font-size:25cqw;line-height:.9}
+.m-menu ul{list-style:none;margin:0;padding:0;display:grid;gap:2.4cqw;border-top:.8cqw solid var(--ink);padding-top:3cqw}
+.m-menu li{display:flex;justify-content:space-between;gap:3cqw;font-size:8.5cqw;line-height:1.05;border-bottom:.5cqw dotted var(--ink);padding-bottom:2cqw}
+.m-menu li span:last-child{font-family:var(--mono);font-size:5cqw;align-self:end}
+.sticker{width:clamp(110px,16vw,200px);aspect-ratio:1;border-radius:50%;border:3px solid var(--ink);display:grid;place-items:center;text-align:center;font-size:clamp(28px,4.4vw,56px);line-height:.95;transition:transform .3s}
+.sticker:hover{transform:rotate(-8deg) scale(1.08)}
+
+/* ---------- specs ---------- */
+.specs{--bg:var(--cobalt);--fg:var(--cream)}
+.spec-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:3px solid var(--cream);margin-top:40px}
+.spec{padding:18px 16px 26px 0;border-bottom:3px solid var(--cream)}
+.spec:not(:nth-child(4n+1)){padding-left:16px;border-left:3px solid var(--cream)}
+.spec b{display:block;font-size:clamp(40px,5.4vw,84px);line-height:1;color:var(--butter)}
+.spec span{font:500 12px/1.3 var(--mono);text-transform:uppercase;letter-spacing:.07em}
+@media (max-width:860px){.spec-grid{grid-template-columns:1fr 1fr}.spec:nth-child(2n+1){padding-left:0;border-left:0}.spec:nth-child(2n){padding-left:16px;border-left:3px solid var(--cream)}}
+.tables{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,3vw,44px);margin-top:clamp(40px,5vw,80px)}
+@media (max-width:860px){.tables{grid-template-columns:1fr}}
+.tbl{width:100%;border-collapse:collapse;font:500 14px/1.4 var(--mono)}
+.tbl th{text-align:left;font-size:11px;letter-spacing:.09em;text-transform:uppercase;border-bottom:3px solid var(--cream);padding:8px 8px 8px 0;color:var(--butter)}
+.tbl td{padding:10px 8px 10px 0;border-bottom:1px solid rgba(255,245,214,.4)}
+.scroll-x{overflow-x:auto}
+
+/* ---------- license ---------- */
+.license{--bg:var(--cream);--fg:var(--ink)}
+.tiers{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(12px,1.6vw,22px);margin-top:40px}
+@media (max-width:1060px){.tiers{grid-template-columns:1fr 1fr}}
+@media (max-width:620px){.tiers{grid-template-columns:1fr}}
+.tier{border:3px solid var(--ink);border-radius:24px;padding:22px;display:flex;flex-direction:column;gap:14px;background:#fff;box-shadow:6px 6px 0 var(--ink);transition:transform .25s}
+.tier:hover{transform:translateY(-6px) rotate(-.6deg)}
+.tier.f{background:var(--cobalt);color:var(--butter)}
+.tier h3{margin:0;font-size:clamp(38px,4vw,56px);line-height:1}
+.tier p{margin:0;font-size:16px}
+.tier .btn{margin-top:auto;justify-content:center}
+.tier.f .btn{background:var(--butter);color:var(--ink);border-color:var(--butter)}
+
+/* ---------- footer ---------- */
+.foot{--bg:var(--ink);--fg:var(--butter);overflow:hidden}
+.foot .cols{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;padding-top:clamp(50px,7vw,100px)}
+.foot .cols p{max-width:36ch;margin:0}
+.foot .fw{font-size:min(38vw,70vh);line-height:.9;text-align:center;margin:.1em 0 0;white-space:nowrap}
+.foot .legal{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font:500 12px/1.3 var(--mono);text-transform:uppercase;letter-spacing:.07em;padding:20px 0 28px;border-top:2px solid var(--butter)}
+
+/* ---------- font fallback notice ---------- */
+.nofont{display:none;position:fixed;left:12px;right:12px;bottom:12px;z-index:80;background:var(--ink);color:var(--butter);border:3px solid var(--butter);border-radius:16px;padding:12px 16px;font:500 13px/1.4 var(--mono)}
+.nofont.show{display:block}
+
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  .js .rise{opacity:1;transform:none;transition:none}
+  .scrollhint i::after,.sbub{animation:none}
+}
+</style>
+</head>
+<body>
+<div class="nofont" id="nofont">The BT Smör font file didn’t load in this view, so headlines are showing a fallback face. Open the page where embedded fonts are allowed, or install the font files directly.</div>
+
+<nav class="nav" id="nav" aria-label="Primary">
+  <a class="logo bt hov" href="#top" aria-label="BT Smör, back to top">BT Smör</a>
+  <div class="links" id="links">
+    <a href="#melt">Melt</a><a href="#axes">Axes</a><a href="#norge">Æ Ø Å</a><a href="#features">Features</a><a href="#glyphs">Glyphs</a><a href="#tester">Tester</a><a href="#inuse">In use</a><a href="#specs">Specs</a><a href="#license">Licence</a>
+  </div>
+  <a class="btn cta" href="#tester">Test the font →</a>
+  <i class="bar" aria-hidden="true"></i>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero sec" id="top">
+  <div class="pin">
+    <div class="hero-top">
+      <div class="label">BT Smör — Variable typeface<br>Version 2.0 · 2026</div>
+      <div class="readout" aria-live="off"><span id="hAxes">BUBL 100 · SLMP 100</span><b id="hMelt">MELT 000 · Solid</b></div>
+    </div>
+    <div class="hero-mid">
+      <div class="bubbles" id="hBubbles" aria-hidden="true"></div>
+      <h1 class="hero-word bt" id="hWord">BT Smör</h1>
+    </div>
+    <div class="hero-bot">
+      <p class="hero-copy">A butter-inspired variable typeface in the spirit of GT Walsheim and Otto Baumberger’s poster lettering. Razor-sharp when cold. Gooey when warm. Drawn for Norwegian.</p>
+      <span class="scrollhint label"><i></i> Scroll to turn up the heat</span>
+    </div>
+  </div>
+</header>
+
+<div class="marq" id="marq1" aria-hidden="true"><div class="track bt"></div></div>
+
+<!-- ============ STATEMENT ============ -->
+<section class="sec statement pad" id="intro" style="--bg:var(--cobalt);--fg:var(--butter)">
+  <div class="wrap">
+    <p class="label rise" style="margin:0 0 28px">01 — The idea</p>
+    <p class="big bt" id="statement">Most typefaces stay the way you left them. BT Smör doesn’t. Turn up the heat and its corners soften, its drips run, its bubbles rise, and the whole line ends up in a puddle.</p>
+    <div class="stats" id="stats">
+      <div class="stat"><b class="bt hov" data-count="3">0</b><span>Variable axes</span></div>
+      <div class="stat"><b class="bt hov" data-count="108">0</b><span>Glyphs</span></div>
+      <div class="stat"><b class="bt hov" data-count="2">0</b><span>Stylistic sets</span></div>
+      <div class="stat"><b class="bt hov" data-count="6">0</b><span>Named instances</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MELT STORY ============ -->
+<section class="sec story" id="melt" aria-label="The melt, in four stages">
+  <div class="pin" id="storyPin">
+    <div class="tabs" id="tabs" role="tablist">
+      <span class="label" style="color:var(--butter);margin-right:10px">02 — MELT axis</span>
+      <button class="tab" role="tab" data-go="0">01 Solid</button>
+      <button class="tab" role="tab" data-go="1">02 Soft</button>
+      <button class="tab" role="tab" data-go="2">03 Gooey</button>
+      <button class="tab" role="tab" data-go="3">04 Puddle</button>
+    </div>
+    <div class="story-mid">
+      <div class="sbubs" id="sBubs" aria-hidden="true"></div>
+      <div class="gauge" aria-hidden="true"><i></i></div>
+      <h2 class="story-word bt" id="sWord" style="color:var(--butter)">Smør</h2>
+    </div>
+    <div class="story-foot">
+      <div class="copy-stack" style="color:var(--butter)">
+        <div class="copy on"><h3 class="bt">Solid.</h3><p>Sharp as a fresh-cut block. Flat-cut terminals, mitred corners, and feet cut dead level on A, V, W and X. This is the typeface before anyone turns on the stove.</p></div>
+        <div class="copy"><h3 class="bt">Soft.</h3><p>Corners start to give. Terminals round off and the first drips form under crossbars and curves.</p></div>
+        <div class="copy"><h3 class="bt">Gooey.</h3><p>Letters lean, droop and sink. Drips run, droplets fall, and bubbles begin to rise.</p></div>
+        <div class="copy"><h3 class="bt">Puddle.</h3><p>Everything ends in the pool. One continuous puddle runs under the whole line, and the foam sits on top.</p></div>
+      </div>
+      <div class="lab" id="lab" style="color:var(--butter)" aria-hidden="true">
+        <figure><div class="tile bt">L</div><figcaption>Corners</figcaption></figure>
+        <figure><div class="tile bt">A</div><figcaption>Feet</figcaption></figure>
+        <figure><div class="tile bt">4</div><figcaption>Joins</figcaption></figure>
+        <figure><div class="tile bt">Z</div><figcaption>Mitres</figcaption></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ AXES ============ -->
+<section class="sec axes pad" id="axes">
+  <div class="wrap">
+    <div class="axes-head">
+      <div><p class="label rise" style="margin:0 0 20px">03 — Three axes, one block of butter</p>
+        <h2 class="h2 bt hov rise">Dial it in.</h2></div>
+      <p class="lede rise">Every letter is built from overlapping strokes, so the font can morph smoothly between a crisp, sharp-cornered face and a bubbling puddle. Scroll and the sliders drift on their own. Grab one and it’s yours.</p>
+    </div>
+    <div class="cards" id="cards">
+      <article class="card rise" data-axis="MELT" style="--cbg:var(--butter);--cfg:var(--ink)">
+        <div class="tagrow"><span class="tag bt">MELT</span><button class="mini" data-sweep>Sweep</button></div>
+        <h3>Meltiness · 0–100 · default 0</h3>
+        <div class="demo"><span class="bt" data-demo>Smør</span></div>
+        <p>From razor-sharp corners to a full puddle. Terminals round off, drips form, letters sink.</p>
+        <div class="ctl"><div class="row"><span>0</span><span class="val" data-val>0</span><span>100</span></div><input type="range" min="0" max="100" value="0" aria-label="MELT axis"></div>
+      </article>
+      <article class="card rise" data-axis="BUBL" style="--cbg:var(--cobalt);--cfg:var(--butter)">
+        <div class="tagrow"><span class="tag bt">BUBL</span><button class="mini" data-sweep style="color:var(--butter)">Sizzle</button></div>
+        <h3>Bubbles · 0–100 · default 100</h3>
+        <div class="demo"><span class="bt" data-demo>Smør</span></div>
+        <p>Foam on the puddle, bubbles rising, tiny pan-sizzle droplets. Animate it for a sizzle. (Shown at MELT 100.)</p>
+        <div class="ctl"><div class="row"><span>0</span><span class="val" data-val>100</span><span>100</span></div><input type="range" min="0" max="100" value="100" aria-label="BUBL axis" style="color:var(--butter)"></div>
+      </article>
+      <article class="card rise" data-axis="SLMP" style="--cbg:var(--hot);--cfg:var(--ink)">
+        <div class="tagrow"><span class="tag bt">SLMP</span><button class="mini" data-sweep>Sweep</button></div>
+        <h3>Slump · 0–100 · default 100</h3>
+        <div class="demo"><span class="bt" data-demo>Smør</span></div>
+        <p>How far the letters lean, droop and sink. Dial it down and a melted line stays readable. (Shown at MELT 100.)</p>
+        <div class="ctl"><div class="row"><span>0</span><span class="val" data-val>100</span><span>100</span></div><input type="range" min="0" max="100" value="100" aria-label="SLMP axis"></div>
+      </article>
+    </div>
+
+    <div class="play rise" id="play">
+      <div class="padwrap">
+        <p class="label" style="margin:0">Playground · drag the dot</p>
+        <div class="xy" id="xy" role="slider" aria-label="MELT horizontally, SLMP vertically" tabindex="0"><span class="ax x">MELT →</span><span class="ax y">↑ SLMP</span><i class="h"></i></div>
+        <div class="ctl" style="color:var(--butter)"><div class="row"><span>BUBL</span><span class="val" id="pbv">100</span></div><input type="range" id="pb" min="0" max="100" value="100" style="color:var(--butter)" aria-label="BUBL"></div>
+        <div class="chips" id="pchips">
+          <button class="chip" data-p="0,100,100">Solid</button>
+          <button class="chip" data-p="33,100,100">Soft</button>
+          <button class="chip" data-p="66,100,100">Gooey</button>
+          <button class="chip" data-p="100,100,100">Puddle</button>
+          <button class="chip" data-p="100,40,20">Calm Puddle</button>
+          <button class="chip" data-p="100,100,0">Hot Pan</button>
+        </div>
+      </div>
+      <div class="play-out">
+        <div class="play-sample bt" id="pSample" contenteditable spellcheck="false" aria-label="Editable sample text">Smør på brød</div>
+        <div class="pv"><span>MELT<b id="pmv">0</b></span><span>BUBL<b id="pbv2">100</b></span><span>SLMP<b id="psv">100</b></span>
+          <span style="margin-left:auto"><button class="chip" id="drift" aria-pressed="false" style="color:var(--butter)"><span>Auto-drift</span></button></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="marq alt" id="marq2" aria-hidden="true"><div class="track bt"></div></div>
+
+<!-- ============ NORGE (horizontal scroll) ============ -->
+<section class="sec norge" id="norge" aria-label="Æ Ø Å">
+  <div class="pin" id="nPin">
+    <div class="htrack" id="hTrack">
+      <div class="hp intro">
+        <p class="label" style="margin:0 0 22px">04 — Skrevet for Norge</p>
+        <h2 class="h2 bt hov">Æ Ø Å, drawn&nbsp;from scratch.</h2>
+        <p class="lede" style="margin-top:24px">Not accents bolted on afterwards. Each Nordic letter is built into the system and melts with it. Watch the heat follow the middle of your screen as they pass.</p>
+      </div>
+      <div class="hp gl"><div class="g bt" data-heat>Æ</div><div class="meta"><span>Æ · U+00C6 · æ U+00E6</span><span class="words bt hov">ærlig</span></div></div>
+      <div class="hp gl"><div class="g bt" data-heat>Ø</div><div class="meta"><span>Ø · U+00D8 · ø U+00F8</span><span class="words bt hov">smør</span></div></div>
+      <div class="hp gl"><div class="g bt" data-heat>Å</div><div class="meta"><span>Å · U+00C5 · å U+00E5</span><span class="words bt hov">på</span></div></div>
+      <div class="hp gl"><div class="g bt" data-heat style="font-size:min(40vh,19vw);white-space:nowrap">Ä Ö É</div><div class="meta"><span>Ä Ö É · ä ö é</span><span class="words bt hov">också</span></div></div>
+      <div class="hp pan"><div class="bt" data-heat data-max="42">Vår søte smør smelter på brødskiva</div></div>
+    </div>
+    <div class="hint"><span>Scroll →</span><i></i></div>
+  </div>
+</section>
+
+<!-- ============ FEATURES ============ -->
+<section class="sec features pad" id="features">
+  <div class="wrap">
+    <div class="feat-head">
+      <div><p class="label rise" style="margin:0 0 20px">05 — OpenType features</p><h2 class="h2 bt hov rise">Two sets of tricks.</h2></div>
+      <div class="featctl rise">
+        <label class="label" for="ftext">Type something</label>
+        <input id="ftext" type="text" value="Dagbladet? Hei, Åre!" aria-label="Sample text for feature comparison">
+        <div class="ctl"><div class="row"><span>Heat all rows</span><span class="val" id="fmv">0</span></div><input type="range" id="fm" min="0" max="100" value="0" aria-label="MELT for all rows"></div>
+      </div>
+    </div>
+    <div class="frows" id="frows">
+      <div class="frow"><div class="meta"><b>Default</b><span>Single-storey a, round dots.</span></div><div class="s bt" data-f="" data-dir="1">Dagbladet? Hei, Åre!</div></div>
+      <div class="frow"><div class="meta"><b>ss01</b><span>Double-storey a for a, å and ä.</span></div><div class="s bt" data-f="ss01" data-dir="-1">Dagbladet? Hei, Åre!</div></div>
+      <div class="frow"><div class="meta"><b>ss02</b><span>Square dots on i, j, ä, ö and . , : ; ! ?</span></div><div class="s bt" data-f="ss02" data-dir="1">Dagbladet? Hei, Åre!</div></div>
+      <div class="frow"><div class="meta"><b>ss01 + ss02</b><span>Both, together.</span></div><div class="s bt" data-f="ss01,ss02" data-dir="-1">Dagbladet? Hei, Åre!</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GLYPHS ============ -->
+<section class="sec glyphs pad" id="glyphs">
+  <div class="wrap">
+    <p class="label rise" style="margin:0 0 20px">06 — The character set</p>
+    <h2 class="h2 bt hov rise">Every glyph.</h2>
+    <div class="gl-layout">
+      <aside class="insp rise" id="insp">
+        <div class="big bt" id="gBig">Å</div>
+        <div class="info"><div><div class="nm" id="gName">Latin Capital Letter A with Ring Above</div></div><div id="gUni" style="text-align:right">U+00C5</div></div>
+        <div class="rg"><div class="row"><span>MELT</span><span id="gmv">0</span></div><input type="range" id="gm" min="0" max="100" value="0" aria-label="MELT"></div>
+        <div class="rg"><div class="row"><span>BUBL</span><span id="gbv">100</span></div><input type="range" id="gb" min="0" max="100" value="100" aria-label="BUBL"></div>
+        <div class="rg"><div class="row"><span>SLMP</span><span id="gsv">100</span></div><input type="range" id="gs" min="0" max="100" value="100" aria-label="SLMP"></div>
+        <div class="tg"><button class="chip" id="gf1" aria-pressed="false"><span>ss01</span></button><button class="chip" id="gf2" aria-pressed="false"><span>ss02</span></button></div>
+      </aside>
+      <div id="ggroups"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TESTER ============ -->
+<section class="sec tester pad" id="tester">
+  <div class="wrap">
+    <div class="t-head"><div><p class="label" style="margin:0 0 20px">07 — Type tester</p><h2 class="h2 bt hov">Take it for a spin.</h2></div><p class="lede">Edit the text on the right. Every control is live.</p></div>
+    <div class="t-layout">
+      <div class="panel" id="tpanel">
+        <div class="ctl"><div class="row"><span>Text</span></div>
+          <select id="tPreset" aria-label="Preset text">
+            <option value="Vår søte smør smelter på brødskiva">Norwegian pangram</option>
+            <option value="Butter makes everything better">English</option>
+            <option value="Smørbrød · Brunost · Lefse · Rømmegrøt">Norwegian food</option>
+            <option value="ABCDEFGHIJKLMNOPQRSTUVWXYZ ÆØÅ">Capitals</option>
+            <option value="abcdefghijklmnopqrstuvwxyz æøå">Lowercase</option>
+            <option value="0123456789 .,:;!?-–—()/+=">Figures &amp; punctuation</option>
+          </select></div>
+        <div class="ctl"><div class="row"><span>Size</span><span class="val" id="tsv">120</span></div><input type="range" id="tSize" min="24" max="320" value="120" aria-label="Size"></div>
+        <div class="ctl"><div class="row"><span>Tracking</span><span class="val" id="ttv">0</span></div><input type="range" id="tTrack" min="-6" max="20" value="0" aria-label="Tracking"></div>
+        <div class="ctl"><div class="row"><span>Leading</span><span class="val" id="tlv">1.05</span></div><input type="range" id="tLead" min="70" max="200" value="105" aria-label="Leading"></div>
+        <div class="seg" id="tAlign"><button aria-pressed="true" data-a="left">Left</button><button aria-pressed="false" data-a="center">Centre</button><button aria-pressed="false" data-a="right">Right</button></div>
+        <div class="ctl"><div class="row"><span>MELT</span><span class="val" id="tmv">0</span></div><input type="range" id="tM" min="0" max="100" value="0" aria-label="MELT"></div>
+        <div class="ctl"><div class="row"><span>BUBL</span><span class="val" id="tbv">100</span></div><input type="range" id="tB" min="0" max="100" value="100" aria-label="BUBL"></div>
+        <div class="ctl"><div class="row"><span>SLMP</span><span class="val" id="tpv">100</span></div><input type="range" id="tS" min="0" max="100" value="100" aria-label="SLMP"></div>
+        <div class="tog"><button class="chip" id="tF1" aria-pressed="false"><span>ss01</span></button><button class="chip" id="tF2" aria-pressed="false"><span>ss02</span></button><button class="chip" id="tAnim" aria-pressed="false"><span>Animate MELT</span></button><button class="chip" id="tReset" aria-pressed="false"><span>Reset</span></button></div>
+        <div class="swatches" id="tSw" role="group" aria-label="Colour themes"></div>
+      </div>
+      <div class="stage" id="stage">
+        <div class="stagebar"><span>BT Smör · Variable</span><span id="tInfo">120 px</span></div>
+        <div class="tout bt" id="tOut" contenteditable spellcheck="false" aria-label="Editable type tester">Vår søte smør smelter på brødskiva</div>
+        <pre class="code" id="tCode"></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ IN USE ============ -->
+<section class="sec inuse pad" id="inuse">
+  <div class="wrap">
+    <p class="label rise" style="margin:0 0 20px">08 — In the wild</p>
+    <h2 class="h2 bt hov rise">Hover to melt.</h2>
+    <div class="mocks" id="mocks">
+      <div class="mock m-wrap" data-par="0">
+        <div class="top"><span>Usaltet</span><span>Netto 250 g</span></div>
+        <div class="name bt hov" style="color:var(--ink)">Smør</div>
+        <div class="bot"><span>Kjøles</span><span>Unsalted butter</span></div>
+      </div>
+      <div class="mock m-poster" data-par="1" id="poster">
+        <div class="small"><span>Utstilling</span><span>Oslo · August 2026</span></div>
+        <div class="lines bt"><div data-b="0">Smør</div><div data-b="34">smelter</div><div data-b="68">på</div><div data-b="100">brødskiva</div></div>
+        <div class="small"><span>Hover to heat</span><span>↓</span></div>
+      </div>
+      <div class="mock m-menu" data-par="2">
+        <h4 class="bt hov" style="--f:'ss01'">Meny</h4>
+        <ul>
+          <li><span class="bt hov" style="--f:'ss01'">Smørbrød</span><span>129,–</span></li>
+          <li><span class="bt hov">Brunost</span><span>49,–</span></li>
+          <li><span class="bt hov" style="--f:'ss01'">Rømmegrøt</span><span>119,–</span></li>
+          <li><span class="bt hov">Lefse</span><span>39,–</span></li>
+        </ul>
+      </div>
+      <div class="mock m-stick" data-par="3">
+        <div class="sticker bt hov" style="background:var(--butter)">100% Smør</div>
+        <div class="sticker bt hov" style="background:var(--cobalt);color:var(--butter)">Æ Ø Å</div>
+        <div class="sticker bt hov" style="background:var(--hot)">Melt me</div>
+        <div class="sticker bt hov" style="background:var(--ink);color:var(--butter)">Varm!</div>
+        <div class="sticker bt hov" style="background:var(--cream)">Smør</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SPECS ============ -->
+<section class="sec specs pad" id="specs">
+  <div class="wrap">
+    <p class="label rise" style="margin:0 0 20px">09 — Specifications</p>
+    <h2 class="h2 bt hov rise" style="color:var(--butter)">The details.</h2>
+    <div class="spec-grid">
+      <div class="spec"><b class="bt hov">1000</b><span>Units per em</span></div>
+      <div class="spec"><b class="bt hov">720</b><span>Cap height</span></div>
+      <div class="spec"><b class="bt hov">540</b><span>x-height</span></div>
+      <div class="spec"><b class="bt hov">−200</b><span>Descender</span></div>
+    </div>
+    <div class="tables">
+      <div class="scroll-x"><table class="tbl"><thead><tr><th>Axis</th><th>Name</th><th>Min</th><th>Default</th><th>Max</th></tr></thead>
+        <tbody><tr><td>MELT</td><td>Meltiness</td><td>0</td><td>0</td><td>100</td></tr><tr><td>BUBL</td><td>Bubbles</td><td>0</td><td>100</td><td>100</td></tr><tr><td>SLMP</td><td>Slump</td><td>0</td><td>100</td><td>100</td></tr></tbody></table></div>
+      <div class="scroll-x"><table class="tbl"><thead><tr><th>Instance</th><th>MELT</th><th>BUBL</th><th>SLMP</th></tr></thead>
+        <tbody><tr><td>Solid</td><td>0</td><td>100</td><td>100</td></tr><tr><td>Soft</td><td>33</td><td>100</td><td>100</td></tr><tr><td>Gooey</td><td>66</td><td>100</td><td>100</td></tr><tr><td>Puddle</td><td>100</td><td>100</td><td>100</td></tr><tr><td>Calm Puddle</td><td>100</td><td>40</td><td>20</td></tr><tr><td>Hot Pan</td><td>100</td><td>100</td><td>0</td></tr></tbody></table></div>
+      <div class="scroll-x"><table class="tbl"><thead><tr><th>Feature</th><th>What it does</th></tr></thead>
+        <tbody><tr><td>ss01</td><td>Double-storey a, å, ä</td></tr><tr><td>ss02</td><td>Square dots on i j ä ö and . , : ; ! ?</td></tr></tbody></table></div>
+      <div class="scroll-x"><table class="tbl"><thead><tr><th>Coverage</th><th>Detail</th></tr></thead>
+        <tbody><tr><td>Latin</td><td>A–Z, a–z, figures, basic punctuation</td></tr><tr><td>Nordic</td><td>Æ Ø Å æ ø å Ä Ö É ä ö é</td></tr><tr><td>Formats</td><td>Variable TTF, plus static Solid and Puddle</td></tr></tbody></table></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LICENCE ============ -->
+<section class="sec license pad" id="license">
+  <div class="wrap">
+    <p class="label rise" style="margin:0 0 20px">10 — Get the fonts</p>
+    <h2 class="h2 bt hov rise">Pick your pat.</h2>
+    <div class="tiers">
+      <div class="tier rise"><h3 class="bt hov">Trial</h3><p>Try BT Smör in your own layouts before you commit.</p><a class="btn" href="#contact">Request trial</a></div>
+      <div class="tier f rise"><h3 class="bt hov">Desktop</h3><p>Print, packaging, signage, video and everything else you design on a computer.</p><a class="btn" href="#contact">Ask for pricing</a></div>
+      <div class="tier rise"><h3 class="bt hov">Web</h3><p>Self-hosted WOFF2 for websites, with the variable axes and features intact.</p><a class="btn" href="#contact">Ask for pricing</a></div>
+      <div class="tier rise"><h3 class="bt hov">Custom</h3><p>More glyphs, more languages, a brand-specific melt. Let’s make your version.</p><a class="btn" href="#contact">Get in touch</a></div>
+    </div>
+  </div>
+</section>
+
+<footer class="sec foot" id="contact">
+  <div class="wrap">
+    <div class="cols">
+      <p class="lede">Questions, licences, custom work? Get in touch and we’ll warm up the pan.</p>
+      <p class="label">BT Smör<br>Variable typeface<br>2026</p>
+    </div>
+    <div class="fw bt" id="fWord" aria-hidden="true">Smør</div>
+    <div class="legal"><span>© 2026 BT</span><a href="#top">Back to top ↑</a></div>
+  </div>
+</footer>
+
+<script>
+document.documentElement.classList.add('js');
+(() => {
+'use strict';
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+const lerp = (a, b, t) => a + (b - a) * t;
+const ease = t => t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const pad3 = n => String(Math.round(n)).padStart(3, '0');
+const stageName = m => m < 17 ? 'Solid' : m < 50 ? 'Soft' : m < 83 ? 'Gooey' : 'Puddle';
+const hex = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
+const mix = (a, b, t) => { const A = hex(a), B = hex(b); return 'rgb(' + A.map((v, i) => Math.round(lerp(v, B[i], t))).join(',') + ')'; };
+const rnd = (a, b) => a + Math.random() * (b - a);
+const navH = () => $('#nav').offsetHeight;
+
+/* set axis values on an element, skipping redundant writes */
+function ax(el, m, b, s) {
+  if (m != null && Math.abs((el._m ?? -9) - m) > .15) { el._m = m; el.style.setProperty('--m', m.toFixed(1)); }
+  if (b != null && Math.abs((el._b ?? -9) - b) > .15) { el._b = b; el.style.setProperty('--b', b.toFixed(1)); }
+  if (s != null && Math.abs((el._s ?? -9) - s) > .15) { el._s = s; el.style.setProperty('--s', s.toFixed(1)); }
+}
+function tween(from, to, ms, fn, done) {
+  const t0 = performance.now();
+  (function f(t) { const p = clamp((t - t0) / ms); fn(lerp(from, to, ease(p))); if (p < 1) requestAnimationFrame(f); else done && done(); })(t0);
+}
+
+/* ---------- font check ---------- */
+if (document.fonts && document.fonts.load) {
+  document.fonts.load('100px "BT Smör"').then(f => { if (!f.length) $('#nofont').classList.add('show'); }).catch(() => $('#nofont').classList.add('show'));
+}
+
+/* ---------- reveal ---------- */
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .12 });
+$$('.rise').forEach(el => io.observe(el));
+
+/* ---------- build decor ---------- */
+const hB = $('#hBubbles'), hBubs = [];
+for (let i = 0; i < 22; i++) {
+  const d = document.createElement('i'); d.className = 'bub';
+  const sz = rnd(14, 90); d.style.cssText = `width:${sz}px;height:${sz}px;left:${rnd(2, 96)}%;top:${rnd(30, 105)}%`;
+  hB.appendChild(d); hBubs.push({ d, sp: rnd(.25, 1.4) });
+}
+const sB = $('#sBubs');
+for (let i = 0; i < 26; i++) {
+  const d = document.createElement('i'); d.className = 'sbub'; const sz = rnd(10, 60);
+  d.style.cssText = `width:${sz}px;height:${sz}px;left:${rnd(2, 96)}%;animation-duration:${rnd(7, 16)}s;animation-delay:${-rnd(0, 14)}s`;
+  sB.appendChild(d);
+}
+sB.style.cssText = 'position:absolute;inset:0;overflow:hidden;pointer-events:none;opacity:0';
+$$('.marq .track').forEach((t, i) => {
+  const txt = i ? 'Butter melts · Smør smelter · ' : 'Smør smelter · Butter melts · ';
+  t.innerHTML = Array(6).fill('<span>' + txt + '</span>').join('');
+});
+
+/* statement words */
+const stEl = $('#statement'); const words = stEl.textContent.split(' ');
+stEl.innerHTML = words.map(w => '<span>' + w + '</span>').join(' ');
+const stSpans = $$('span', stEl);
+
+/* stat counters */
+const cio = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return; cio.unobserve(e.target);
+  const to = +e.target.dataset.count; tween(0, to, 1400, v => e.target.textContent = Math.round(v));
+}), { threshold: .6 });
+$$('[data-count]').forEach(el => cio.observe(el));
+
+/* ---------- hero / story / norge refs ---------- */
+const hero = $('#top'), hWord = $('#hWord'), hMelt = $('#hMelt');
+const story = $('#melt'), sWord = $('#sWord'), copies = $$('.copy'), tabs = $$('.tab'), labTiles = $$('#lab .tile');
+const norge = $('#norge'), hTrack = $('#hTrack'), nPin = $('#nPin'), heats = $$('[data-heat]');
+const marq = [$('#marq1'), $('#marq2')].map((el, i) => ({ el, tr: $('.track', el), x: 0, dir: i ? 1 : -1, w: 1 }));
+const fRows = $$('.frow .s');
+const axisCards = $$('.card').map(c => ({ c, tag: c.dataset.axis, demo: $('[data-demo]', c), rng: $('input', c), val: $('[data-val]', c), auto: true, busy: false }));
+const mocks = $$('.mock'), poster = $('#poster'), posterLines = $$('.lines div', poster);
+const fWord = $('#fWord'), foot = $('#contact');
+let sy = scrollY, vel = 0, activeStage = -1;
+
+function pinProgress(sec, pin) {
+  const r = sec.getBoundingClientRect(); const nh = navH();
+  return clamp((nh - r.top) / Math.max(1, r.height - pin.offsetHeight));
+}
+
+tabs.forEach(t => t.addEventListener('click', () => {
+  const r = story.getBoundingClientRect(); const span = r.height - $('#storyPin').offsetHeight;
+  const top = r.top + scrollY + span * (+t.dataset.go * .25 + .03) - navH();
+  scrollTo({ top, behavior: reduce ? 'auto' : 'smooth' });
+}));
+
+function frame() {
+  const y = scrollY, vh = innerHeight, vw = innerWidth;
+  vel = lerp(vel, y - sy, .16); sy = y;
+
+  /* nav progress + spy */
+  const doc = document.documentElement; $('#nav').style.setProperty('--prog', (y / Math.max(1, doc.scrollHeight - vh)).toFixed(4));
+
+  /* hero */
+  const hr = hero.getBoundingClientRect();
+  if (hr.bottom > 0) {
+    const p = pinProgress(hero, $('.pin', hero)); const m = clamp(p / .9) * 100;
+    ax(hWord, m, 100, 100);
+    hero.style.setProperty('--hero-bg', mix('#FFD21F', '#FF4B1F', ease(clamp(p / .9))));
+    const txt = 'MELT ' + pad3(m) + ' · ' + stageName(m); if (hMelt.textContent !== txt) hMelt.textContent = txt;
+    const op = clamp((m - 25) / 40) * .85;
+    hBubs.forEach(b => { b.d.style.opacity = op; b.d.style.transform = `translateY(${(-p * b.sp * vh * 1.1).toFixed(1)}px)`; });
+  }
+
+  /* story */
+  const sr = story.getBoundingClientRect();
+  if (sr.bottom > 0 && sr.top < vh) {
+    const p = pinProgress(story, $('#storyPin')); const m = p * 100;
+    ax(sWord, m, 100, 100); labTiles.forEach(t => ax(t, m, 100, 100));
+    story.style.setProperty('--heat', p.toFixed(3)); sB.style.opacity = clamp((p - .4) / .4);
+    const st = Math.min(3, Math.floor(p * 4)); 
+    if (st !== activeStage) { activeStage = st; copies.forEach((c, i) => c.classList.toggle('on', i === st)); tabs.forEach((t, i) => { t.classList.toggle('on', i === st); t.setAttribute('aria-selected', i === st); }); }
+  }
+
+  /* statement reveal */
+  const str = stEl.getBoundingClientRect();
+  if (str.bottom > 0 && str.top < vh) {
+    const t = clamp((vh * .85 - str.top) / (str.height + vh * .45)); const n = stSpans.length;
+    stSpans.forEach((w, i) => { const o = (.18 + .82 * clamp((t * (n + 6) - i) / 6)).toFixed(2); if (w._o !== o) { w._o = o; w.style.opacity = o; } });
+  }
+
+  /* axis cards */
+  axisCards.forEach(a => {
+    const r = a.c.getBoundingClientRect(); if (r.bottom < 0 || r.top > vh) return;
+    if (a.auto && !a.busy) {
+      const k = clamp(1 - (r.top + r.height / 2) / vh, 0, 1); const v = clamp(k / .75) * 100;
+      a.rng.value = v;
+    }
+    const v = +a.rng.value; a.val.textContent = Math.round(v);
+    if (a.tag === 'MELT') ax(a.demo, v, 100, 100); else if (a.tag === 'BUBL') ax(a.demo, 100, v, 100); else ax(a.demo, 100, 40, v);
+  });
+
+  /* norge horizontal */
+  const nr = norge.getBoundingClientRect();
+  if (nr.bottom > 0 && nr.top < vh) {
+    const p = pinProgress(norge, nPin); const max = Math.max(0, hTrack.scrollWidth - vw + 40);
+    hTrack.style.transform = `translate3d(${(-p * max).toFixed(1)}px,0,0)`; norge.style.setProperty('--hp', p.toFixed(3));
+    $('.hint', norge).style.setProperty('--hp', p.toFixed(3));
+    heats.forEach(h => {
+      const b = h.getBoundingClientRect(); const c = b.left + b.width / 2; const d = Math.abs(c - vw / 2) / (vw * .55);
+      ax(h, Math.pow(clamp(1 - d), .8) * (+h.dataset.max || 72), 100, 100);
+    });
+  }
+
+  /* feature rows parallax */
+  fRows.forEach(f => {
+    const r = f.getBoundingClientRect(); if (r.bottom < 0 || r.top > vh) return;
+    const k = (r.top + r.height / 2 - vh / 2) / vh; f.style.transform = `translateX(${(k * 90 * +f.dataset.dir).toFixed(1)}px)`;
+  });
+
+  /* mocks parallax + poster melt */
+  mocks.forEach(m => {
+    const r = m.getBoundingClientRect(); if (r.bottom < -100 || r.top > vh + 100) return;
+    const k = (r.top + r.height / 2 - vh / 2) / vh; const i = +m.dataset.par;
+    m.style.transform = `translateY(${(k * (14 + i * 12)).toFixed(1)}px) rotate(${(k * (i % 2 ? -1.6 : 1.6)).toFixed(2)}deg)`;
+  });
+  const pr = poster.getBoundingClientRect();
+  if (pr.bottom > 0 && pr.top < vh) {
+    const k = clamp(1 - (pr.top + pr.height / 2) / vh * .9, 0, 1); const hv = poster.matches(':hover') ? 1 : 0;
+    posterLines.forEach(l => ax(l, clamp(+l.dataset.b * (.3 + .7 * Math.max(k, hv))), 100, 100));
+  }
+
+  /* marquees: scroll + velocity driven, heat follows speed */
+  const heat = clamp(Math.abs(vel) / 38) * 100;
+  marq.forEach(mq => {
+    const r = mq.el.getBoundingClientRect(); if (r.bottom < 0 || r.top > vh) return;
+    const half = mq.tr.scrollWidth / 2; if (!half) return;
+    mq.x += mq.dir * ((reduce ? 0 : .6) + vel * .9);
+    if (mq.x < -half) mq.x += half; if (mq.x > 0) mq.x -= half;
+    mq.tr.style.transform = `translate3d(${mq.x.toFixed(1)}px,0,0)`; ax(mq.tr, heat, 100, 100);
+  });
+
+  /* footer word */
+  const fr = foot.getBoundingClientRect();
+  if (fr.top < vh) ax(fWord, clamp((vh - fr.top) / (fr.height * .9)) * 100, 100, 100);
+
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+
+/* nav spy */
+const links = $$('#links a'); const spyMap = links.map(a => ({ a, s: $(a.getAttribute('href')) }));
+const spy = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) links.forEach(l => l.classList.toggle('on', l.getAttribute('href') === '#' + e.target.id));
+}), { rootMargin: '-45% 0px -50% 0px' });
+spyMap.forEach(o => o.s && spy.observe(o.s));
+
+/* ---------- axis cards: interaction ---------- */
+axisCards.forEach(a => {
+  a.rng.addEventListener('input', () => { a.auto = false; });
+  $('[data-sweep]', a.c).addEventListener('click', () => {
+    a.auto = false; a.busy = true; const base = +a.rng.value; const lo = 0, hi = 100;
+    if (a.tag === 'BUBL') { const t0 = performance.now(); (function f(t) { const p = (t - t0) / 3200; a.rng.value = 60 + 40 * Math.sin(p * 60); if (p < 1) requestAnimationFrame(f); else { a.rng.value = 100; a.busy = false; } })(t0); }
+    else tween(lo, hi, 1500, v => a.rng.value = v, () => tween(hi, lo, 1500, v => a.rng.value = v, () => { a.busy = false; }));
+  });
+});
+
+/* ---------- playground ---------- */
+const xy = $('#xy'), pS = $('#pSample'), pb = $('#pb'); let P = { m: 66, b: 100, s: 100 }, drift = false;
+function pApply() {
+  ax(pS, P.m, P.b, P.s);
+  xy.style.setProperty('--px', P.m + '%'); xy.style.setProperty('--py', (100 - P.s) + '%');
+  $('#pmv').textContent = Math.round(P.m); $('#psv').textContent = Math.round(P.s); $('#pbv2').textContent = Math.round(P.b); $('#pbv').textContent = Math.round(P.b);
+  pb.value = P.b; $$('#pchips .chip').forEach(c => c.setAttribute('aria-pressed', String(c.dataset.p === [Math.round(P.m), Math.round(P.b), Math.round(P.s)].join(','))));
+}
+function xyMove(e) { const r = xy.getBoundingClientRect(); P.m = clamp((e.clientX - r.left) / r.width) * 100; P.s = (1 - clamp((e.clientY - r.top) / r.height)) * 100; drift = false; $('#drift').setAttribute('aria-pressed', 'false'); pApply(); }
+xy.addEventListener('pointerdown', e => { xy.setPointerCapture(e.pointerId); xyMove(e); const mv = ev => xyMove(ev); const up = () => { xy.removeEventListener('pointermove', mv); xy.removeEventListener('pointerup', up); }; xy.addEventListener('pointermove', mv); xy.addEventListener('pointerup', up); });
+xy.addEventListener('keydown', e => { const d = e.shiftKey ? 10 : 2; if (e.key === 'ArrowLeft') P.m -= d; else if (e.key === 'ArrowRight') P.m += d; else if (e.key === 'ArrowUp') P.s += d; else if (e.key === 'ArrowDown') P.s -= d; else return; P.m = clamp(P.m, 0, 100); P.s = clamp(P.s, 0, 100); e.preventDefault(); pApply(); });
+pb.addEventListener('input', () => { P.b = +pb.value; pApply(); });
+$$('#pchips .chip').forEach(c => c.addEventListener('click', () => {
+  const [m, b, s] = c.dataset.p.split(',').map(Number); drift = false; $('#drift').setAttribute('aria-pressed', 'false');
+  const f = { ...P }; tween(0, 1, 700, t => { P.m = lerp(f.m, m, t); P.b = lerp(f.b, b, t); P.s = lerp(f.s, s, t); pApply(); });
+}));
+$('#drift').addEventListener('click', e => { drift = !drift; e.currentTarget.setAttribute('aria-pressed', String(drift)); if (drift) { const t0 = performance.now(); (function f(t) { if (!drift) return; const k = (t - t0) / 1000; P.m = 50 + 50 * Math.sin(k * .9); P.s = 50 + 50 * Math.sin(k * .6 + 1.3); P.b = 70 + 30 * Math.sin(k * 4); pApply(); requestAnimationFrame(f); })(t0); } });
+pApply();
+
+/* ---------- features ---------- */
+const ft = $('#ftext'), fm = $('#fm');
+fRows.forEach(f => { f.style.setProperty('--f', f.dataset.f ? f.dataset.f.split(',').map(s => '"' + s + '"').join(',') : 'normal'); });
+function fApply() { fRows.forEach(f => { f.textContent = ft.value || ' '; ax(f, +fm.value, 100, 100); }); $('#fmv').textContent = fm.value; }
+ft.addEventListener('input', fApply); fm.addEventListener('input', fApply); fApply();
+
+/* ---------- glyphs ---------- */
+const nameMap = { '.': 'Full stop', ',': 'Comma', ':': 'Colon', ';': 'Semicolon', '!': 'Exclamation mark', '?': 'Question mark', '-': 'Hyphen-minus', '–': 'En dash', '—': 'Em dash', "'": 'Apostrophe', '"': 'Quotation mark', '(': 'Left parenthesis', ')': 'Right parenthesis', '/': 'Solidus', '+': 'Plus sign', '=': 'Equals sign',
+  'Æ': 'Latin Capital Letter AE', 'æ': 'Latin Small Letter AE', 'Ø': 'Latin Capital Letter O with Stroke', 'ø': 'Latin Small Letter O with Stroke', 'Å': 'Latin Capital Letter A with Ring Above', 'å': 'Latin Small Letter A with Ring Above',
+  'Ä': 'Latin Capital Letter A with Diaeresis', 'ä': 'Latin Small Letter A with Diaeresis', 'Ö': 'Latin Capital Letter O with Diaeresis', 'ö': 'Latin Small Letter O with Diaeresis', 'É': 'Latin Capital Letter E with Acute', 'é': 'Latin Small Letter E with Acute' };
+const digitNames = ['Zero', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine'];
+const gName = c => nameMap[c] || (/[A-Z]/.test(c) ? 'Latin Capital Letter ' + c : /[a-z]/.test(c) ? 'Latin Small Letter ' + c.toUpperCase() : /[0-9]/.test(c) ? 'Digit ' + digitNames[+c] : c);
+const groups = [['Nordic', 'ÆØÅæøåÄÖÉäöé'], ['Uppercase', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'], ['Lowercase', 'abcdefghijklmnopqrstuvwxyz'], ['Figures', '0123456789'], ['Punctuation', ".,:;!?-–—'\"()/+="]];
+const gg = $('#ggroups'); let gSel = 'Å'; const gm = $('#gm'), gb = $('#gb'), gs = $('#gs'), gf1 = $('#gf1'), gf2 = $('#gf2'), gBig = $('#gBig');
+groups.forEach(([n, chars]) => {
+  const g = document.createElement('div'); g.className = 'ggroup'; g.innerHTML = '<h3>' + n + ' · ' + Array.from(chars).length + '</h3><div class="ggrid"></div>';
+  const grid = $('.ggrid', g);
+  Array.from(chars).forEach(c => { const b = document.createElement('button'); b.className = 'cell bt hov'; b.textContent = c; b.dataset.c = c; b.setAttribute('aria-label', gName(c)); b.setAttribute('aria-pressed', String(c === gSel)); b.addEventListener('click', () => { gSel = c; gUpdate(); }); grid.appendChild(b); });
+  gg.appendChild(g);
+});
+const hasA = c => 'aåä'.includes(c), hasD = c => 'ijäöÄÖ.,:;!?'.includes(c);
+function gUpdate() {
+  gBig.textContent = gSel; $('#gName').textContent = gName(gSel); $('#gUni').textContent = 'U+' + gSel.codePointAt(0).toString(16).toUpperCase().padStart(4, '0');
+  $$('.cell').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.c === gSel)));
+  gf1.disabled = !hasA(gSel); gf2.disabled = !hasD(gSel);
+  if (gf1.disabled) gf1.setAttribute('aria-pressed', 'false'); if (gf2.disabled) gf2.setAttribute('aria-pressed', 'false');
+  const f = []; if (gf1.getAttribute('aria-pressed') === 'true') f.push('"ss01"'); if (gf2.getAttribute('aria-pressed') === 'true') f.push('"ss02"');
+  gBig.style.setProperty('--f', f.join(',') || 'normal'); ax(gBig, +gm.value, +gb.value, +gs.value);
+  $('#gmv').textContent = gm.value; $('#gbv').textContent = gb.value; $('#gsv').textContent = gs.value;
+}
+[gm, gb, gs].forEach(r => r.addEventListener('input', gUpdate));
+[gf1, gf2].forEach(b => b.addEventListener('click', () => { b.setAttribute('aria-pressed', String(b.getAttribute('aria-pressed') !== 'true')); gUpdate(); }));
+gUpdate();
+
+/* ---------- tester ---------- */
+const T = { size: 120, track: 0, lead: 105, align: 'left', m: 0, b: 100, s: 100, f1: false, f2: false, th: 0 };
+const themes = [['#FFD21F', '#140D00'], ['#140D00', '#FFD21F'], ['#2335FF', '#FFD21F'], ['#FF4B1F', '#140D00'], ['#FFB8D4', '#2335FF'], ['#FFF5D6', '#140D00']];
+const out = $('#tOut'), stage = $('#stage');
+themes.forEach((t, i) => { const b = document.createElement('button'); b.className = 'sw'; b.style.background = t[0]; b.style.setProperty('--c2', t[1]); b.setAttribute('aria-label', 'Theme ' + (i + 1)); b.setAttribute('aria-pressed', String(i === 0)); b.addEventListener('click', () => { T.th = i; tApply(); }); $('#tSw').appendChild(b); });
+function tApply() {
+  out.style.fontSize = T.size + 'px'; out.style.letterSpacing = (T.track / 100) + 'em'; out.style.lineHeight = T.lead / 100; out.style.textAlign = T.align;
+  ax(out, T.m, T.b, T.s); const f = []; if (T.f1) f.push('"ss01"'); if (T.f2) f.push('"ss02"'); out.style.setProperty('--f', f.join(',') || 'normal');
+  stage.style.setProperty('--sb', themes[T.th][0]); stage.style.setProperty('--sf', themes[T.th][1]);
+  $('#tsv').textContent = T.size; $('#ttv').textContent = (T.track / 100).toFixed(2) + 'em'; $('#tlv').textContent = (T.lead / 100).toFixed(2);
+  $('#tmv').textContent = Math.round(T.m); $('#tbv').textContent = Math.round(T.b); $('#tpv').textContent = Math.round(T.s);
+  $('#tInfo').textContent = T.size + ' px · ' + stageName(T.m);
+  $$('#tSw .sw').forEach((s, i) => s.setAttribute('aria-pressed', String(i === T.th)));
+  $$('#tAlign button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.a === T.align)));
+  $('#tF1').setAttribute('aria-pressed', String(T.f1)); $('#tF2').setAttribute('aria-pressed', String(T.f2));
+  $('#tCode').textContent = 'font-family: "BT Smör";\nfont-size: ' + T.size + 'px;\nletter-spacing: ' + (T.track / 100).toFixed(2) + 'em;\nfont-variation-settings: "MELT" ' + Math.round(T.m) + ', "BUBL" ' + Math.round(T.b) + ', "SLMP" ' + Math.round(T.s) + ';\nfont-feature-settings: ' + (f.join(', ') || 'normal') + ';';
+}
+const bind = (id, key, fn) => $(id).addEventListener('input', e => { T[key] = +e.target.value; if (key === 'm') anim = false, $('#tAnim').setAttribute('aria-pressed', 'false'); tApply(); });
+bind('#tSize', 'size'); bind('#tTrack', 'track'); bind('#tLead', 'lead'); bind('#tM', 'm'); bind('#tB', 'b'); bind('#tS', 's');
+$$('#tAlign button').forEach(b => b.addEventListener('click', () => { T.align = b.dataset.a; tApply(); }));
+$('#tF1').addEventListener('click', () => { T.f1 = !T.f1; tApply(); }); $('#tF2').addEventListener('click', () => { T.f2 = !T.f2; tApply(); });
+$('#tPreset').addEventListener('change', e => { out.textContent = e.target.value; });
+let anim = false;
+$('#tAnim').addEventListener('click', () => { anim = !anim; $('#tAnim').setAttribute('aria-pressed', String(anim)); if (anim) { const t0 = performance.now(); (function f(t) { if (!anim) return; T.m = 50 - 50 * Math.cos((t - t0) / 1100); $('#tM').value = T.m; tApply(); requestAnimationFrame(f); })(t0); } });
+$('#tReset').addEventListener('click', () => { anim = false; Object.assign(T, { size: 120, track: 0, lead: 105, align: 'left', m: 0, b: 100, s: 100, f1: false, f2: false, th: 0 }); [['#tSize', 120], ['#tTrack', 0], ['#tLead', 105], ['#tM', 0], ['#tB', 100], ['#tS', 100]].forEach(([i, v]) => $(i).value = v); $('#tAnim').setAttribute('aria-pressed', 'false'); tApply(); });
+tApply();
+})();
+</script>
+</body>
+</html>

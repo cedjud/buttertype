@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>BT Smör mobile menu</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Familjen+Grotesk:wght@400;500;600;700&display=swap">
+<style>
+@font-face{font-family:"BT Smör";src:url(/_blob/15c80a26168368d082474370359a4c47) format("woff2")}
+body{margin:0}
+a{color:#FFD21F}
+</style>
+</helmet>
+<div style="width:390px;height:844px;box-sizing:border-box;background:#0A0A0A;color:#FFD21F;font-family:'Familjen Grotesk',system-ui,sans-serif;display:flex;flex-direction:column;overflow:hidden">
+  <div style="height:56px;flex:none;box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #FFD21F">
+    <span style="padding:0 20px;font-family:'BT Smör',sans-serif;font-size:28px;line-height:56px">BT Smör</span>
+    <a href="Mobile-Hero.dc.html" style="height:56px;box-sizing:border-box;padding:0 20px;display:flex;align-items:center;border-left:1px solid #FFD21F;font-family:'DM Mono',monospace;font-size:13px;letter-spacing:.06em;text-transform:uppercase;text-decoration:none">Close ×</a>
+  </div>
+  <sc-for list="{{links}}" as="l" hint-placeholder-count="8">
+    <a href="#" style="height:76px;flex:none;box-sizing:border-box;display:grid;grid-template-columns:64px minmax(0, 1fr) 56px;align-items:center;border-bottom:1px solid #FFD21F;text-decoration:none">
+      <span style="padding-left:20px;font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.08em">{{l.num}}</span>
+      <span style="font-family:'BT Smör',sans-serif;font-size:48px;line-height:1;color:#FFD21F">{{l.name}}</span>
+      <span style="font-family:'DM Mono',monospace;font-size:16px;color:#FFFFFF">→</span>
+    </a>
+  </sc-for>
+  <div style="height:56px;flex:none;display:grid;grid-template-columns:repeat(5, minmax(0, 1fr));border-bottom:1px solid #FFD21F;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#FFFFFF">
+    <div style="display:flex;align-items:center;padding-left:20px;border-right:1px solid #FFD21F;color:#FFD21F">Mood</div>
+    <a href="#" style="display:flex;align-items:center;justify-content:center;border-right:1px solid #FFD21F;text-decoration:none;color:#FFFFFF">Solid</a>
+    <a href="#" style="display:flex;align-items:center;justify-content:center;border-right:1px solid #FFD21F;text-decoration:none;color:#FFFFFF">Soft</a>
+    <a href="#" style="display:flex;align-items:center;justify-content:center;border-right:1px solid #FFD21F;text-decoration:none;color:#FFFFFF">Gooey</a>
+    <a href="#" style="display:flex;align-items:center;justify-content:center;text-decoration:none;color:#FFFFFF">Puddle</a>
+  </div>
+  <a href="#" style="flex:1;min-height:0;display:flex;align-items:center;justify-content:space-between;padding:0 20px;background:#FFD21F;color:#0A0A0A;text-decoration:none;font-family:'DM Mono',monospace;font-size:13px;letter-spacing:.06em;text-transform:uppercase"><span>Test the font</span><span style="font-size:20px">→</span></a>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const names = ['Melt', 'Axes', 'Æ Ø Å', 'Glyphs', 'Tester', 'In use', 'Specs', 'Licence'];
+    return { links: names.map((n, i) => ({ num: String(i + 1).padStart(2, '0'), name: n })) };
+  }
+}
+</script>
+</body>
+</html>

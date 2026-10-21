@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>BT Smör mobile hero</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Familjen+Grotesk:wght@400;500;600;700&display=swap">
+<style>
+@font-face{font-family:"BT Smör";src:url(/_blob/15c80a26168368d082474370359a4c47) format("woff2")}
+body{margin:0}
+a{color:#0A0A0A}
+</style>
+</helmet>
+<div style="position:relative;width:390px;height:844px;box-sizing:border-box;background:#FFD21F;color:#0A0A0A;font-family:'Familjen Grotesk',system-ui,sans-serif;display:flex;flex-direction:column;overflow:hidden">
+  <div style="position:absolute;inset:0;display:grid;grid-template-columns:repeat(4, minmax(0, 1fr));pointer-events:none">
+    <div style="border-left:1px solid rgba(10,10,10,.22)"></div><div style="border-left:1px solid rgba(10,10,10,.22)"></div><div style="border-left:1px solid rgba(10,10,10,.22)"></div><div style="border-left:1px solid rgba(10,10,10,.22);border-right:1px solid rgba(10,10,10,.22)"></div>
+  </div>
+  <nav style="position:relative;height:56px;flex:none;box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;background:#FFFFFF;border-bottom:1px solid #0A0A0A">
+    <a href="#" style="padding:0 20px;font-family:'BT Smör',sans-serif;font-size:28px;line-height:56px;text-decoration:none">BT Smör</a>
+    <a href="Mobile-Menu.dc.html" style="height:56px;box-sizing:border-box;padding:0 20px;display:flex;align-items:center;border-left:1px solid #0A0A0A;font-family:'DM Mono',monospace;font-size:13px;letter-spacing:.06em;text-transform:uppercase;text-decoration:none">Menu</a>
+  </nav>
+  <div style="position:relative;display:grid;grid-template-columns:repeat(2, minmax(0, 1fr));border-bottom:1px solid #0A0A0A;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;line-height:1.5">
+    <div style="padding:14px 20px;border-right:1px solid #0A0A0A">Variable typeface<br>3 axes · 108 glyphs</div>
+    <div style="padding:14px 20px;text-align:right">BUBL {{bubl}} · SLMP {{slmp}}<div style="font-size:14px;font-weight:500;letter-spacing:0;line-height:1.4">{{readout}}</div></div>
+  </div>
+  <div style="position:relative;flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;padding:0 16px">
+    <h1 style="margin:0;{{lineStyle}}"><span style="display:block">BT</span><span style="display:block">Smör</span></h1>
+  </div>
+  <p style="position:relative;margin:0;padding:18px 20px;font-size:16px;line-height:1.4;border-top:1px solid #0A0A0A">A butter-inspired variable typeface in the spirit of GT Walsheim and Otto Baumberger’s poster lettering. Sharp when cold. Gooey when warm. Drawn for Norwegian.</p>
+  <div style="position:relative;height:56px;flex:none;display:grid;grid-template-columns:repeat(2, minmax(0, 1fr));border-top:1px solid #0A0A0A">
+    <div style="padding:0 20px;display:flex;align-items:center;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;border-right:1px solid #0A0A0A">Scroll to melt ↓</div>
+    <a href="#" style="display:flex;align-items:center;justify-content:center;background:#0A0A0A;color:#FFD21F;text-decoration:none;font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.06em;text-transform:uppercase">Test the font →</a>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"melt":{"editor":"range","default":0,"min":0,"max":100,"step":1,"section":"Axes"},"bubl":{"editor":"range","default":100,"min":0,"max":100,"step":1,"section":"Axes"},"slmp":{"editor":"range","default":100,"min":0,"max":100,"step":1,"section":"Axes"},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const m = this.props.melt ?? 0, b = this.props.bubl ?? 100, s = this.props.slmp ?? 100;
+    const name = m < 17 ? 'Solid' : m < 50 ? 'Soft' : m < 83 ? 'Gooey' : 'Puddle';
+    const lineStyle = "font-family:'BT Smör',sans-serif;font-weight:400;font-size:128px;line-height:.92;white-space:nowrap;font-variation-settings:'MELT' " + m + ",'BUBL' " + b + ",'SLMP' " + s;
+    return { lineStyle, bubl: Math.round(b), slmp: Math.round(s), readout: 'MELT ' + String(Math.round(m)).padStart(3, '0') + ' · ' + name };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Melt stages tablet</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Familjen+Grotesk:wght@400;500;600;700&display=swap">
+<style>
+@font-face{font-family:"BT Smör";src:url(/_blob/15c80a26168368d082474370359a4c47) format("woff2")}
+body{margin:0}
+</style>
+</helmet>
+<div style="width:768px;height:1092px;box-sizing:border-box;background:#0A0A0A;color:#FFD21F;font-family:'Familjen Grotesk',system-ui,sans-serif;display:flex;flex-direction:column;overflow:hidden">
+  <div style="height:52px;flex:none;box-sizing:border-box;display:grid;grid-template-columns:190px minmax(0, 1fr);border-bottom:1px solid #FFD21F;font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.09em;text-transform:uppercase">
+    <div style="display:flex;align-items:center;padding:0 24px;border-right:1px solid #FFD21F">02 — MELT axis</div>
+    <div style="display:flex;align-items:center;padding:0 24px;color:#FFFFFF">Four stages · one variable font</div>
+  </div>
+  <sc-for list="{{stages}}" as="st" hint-placeholder-count="4">
+    <div style="flex:1;min-height:0;display:grid;grid-template-columns:190px minmax(0, 1fr);border-bottom:1px solid #FFD21F">
+      <div style="padding:20px 24px;border-right:1px solid #FFD21F;display:flex;flex-direction:column;justify-content:space-between;font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.09em;text-transform:uppercase">
+        <span>{{st.num}}</span>
+        <span style="font-family:'BT Smör',sans-serif;font-size:42px;line-height:1;letter-spacing:0;text-transform:none;color:#FFFFFF">{{st.name}}</span>
+        <span>MELT {{st.m}}</span>
+      </div>
+      <div style="display:flex;flex-direction:column;min-width:0">
+        <div style="height:190px;flex:none;display:flex;align-items:center;padding:0 24px;overflow:hidden;border-bottom:1px solid #FFD21F"><div style="{{st.wordStyle}}">Smør</div></div>
+        <div style="flex:1;padding:16px 24px;font-size:17px;line-height:1.4;color:#FFFFFF">{{st.text}}</div>
+      </div>
+    </div>
+  </sc-for>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":768,"height":1092}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const mk = (num, name, m, text) => ({ num, name, m, text, wordStyle: "font-family:'BT Smör',sans-serif;font-weight:400;font-size:166px;line-height:1;white-space:nowrap;padding-bottom:8px;font-variation-settings:'MELT' " + m + ",'BUBL' 100,'SLMP' 100" });
+    return { stages: [
+      mk('01', 'Solid', 0, 'Sharp as a fresh-cut block. Flat-cut terminals, mitred corners, and feet cut dead level on A, V, W and X.'),
+      mk('02', 'Soft', 33, 'Corners start to give. Terminals round off and the first drips form under crossbars and curves.'),
+      mk('03', 'Gooey', 66, 'Letters lean, droop and sink. Drips run, droplets fall, and bubbles begin to rise.'),
+      mk('04', 'Puddle', 100, 'Everything ends in the pool. One continuous puddle runs under the whole line, and the foam sits on top.')
+    ] };
+  }
+}
+</script>
+</body>
+</html>

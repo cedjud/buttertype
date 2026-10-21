@@ -1,0 +1,18 @@
+.guides {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  border-right: 1px solid var(--guide-on-yellow);
+  pointer-events: none;
+}
+.guides span { border-left: 1px solid var(--guide-on-yellow); }
+
+@media (max-width: 1023px) {
+  .guides { grid-template-columns: repeat(8, minmax(0, 1fr)); }
+  .guides span:nth-child(n + 9) { display: none; }
+}
+@media (max-width: 639px) {
+  .guides { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .guides span:nth-child(n + 5) { display: none; }
+}
