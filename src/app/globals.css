@@ -38,6 +38,11 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 /* Small mono caps at 11px (tokens.css .label is 12px). */
 .label-sm { font: 400 11px/1.5 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; }
 
+/* Responsive line breaks: <span class="br-t" /> breaks below 1024, .br-m below 640. */
+.br-t, .br-m { display: none; }
+@media (max-width: 1023px) { .br-t { display: block; } }
+@media (max-width: 639px)  { .br-m { display: block; } }
+
 @media (prefers-reduced-motion: reduce) {
   .bt-hover { transition: none; }
 }

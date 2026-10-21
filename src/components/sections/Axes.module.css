@@ -1,0 +1,133 @@
+.axes {
+  --rule: var(--black);
+  background: var(--white);
+  color: var(--black);
+}
+
+.title { font-size: min(7.78vw, 124px); }
+
+.list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-bottom: 1px solid var(--rule);
+}
+
+.axis {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  border-right: 1px solid var(--rule);
+}
+.axis:last-child { border-right: 0; }
+
+.axisHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding: 20px var(--gutter);
+  border-bottom: 1px solid var(--rule);
+}
+.tag { font-size: 56px; line-height: 1; }
+.range {
+  font: 400 12px/1.5 var(--font-mono);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  text-align: right;
+}
+.range > span:first-child { display: block; }
+
+.field {
+  container-type: inline-size;
+  flex: 1;
+  min-height: 360px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 18px;
+  overflow: clip;
+}
+.yellow { background: var(--yellow); color: var(--black); }
+.black  { background: var(--black);  color: var(--yellow); }
+.white  { background: var(--white);  color: var(--black); }
+
+/* "Smør" is ≤2.77em; leave room for SLMP 0 squash. */
+.word {
+  font-size: min(9.17vw, 100cqi / 3.1);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.body { display: flex; flex-direction: column; }
+.text {
+  min-height: 84px;
+  padding: 20px var(--gutter) 0;
+  font-size: 15px;
+  line-height: 1.4;
+  border-top: 1px solid var(--rule);
+}
+.control { padding: 18px var(--gutter) 24px; }
+
+/* ---------- tablet: wide rows ---------- */
+@media (max-width: 1023px) {
+  .title { font-size: 17.2vw; white-space: nowrap; }
+
+  .list { grid-template-columns: 1fr; border-bottom: 0; }
+  .axis {
+    display: grid;
+    grid-template-columns: var(--meta-col) minmax(0, 1fr);
+    grid-template-areas: "head field" "head body";
+    border-right: 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .axisHead {
+    grid-area: head;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px 24px;
+    border-bottom: 0;
+    border-right: 1px solid var(--rule);
+  }
+  .tag { font-size: 54px; }
+  .range { text-align: left; }
+  .range > span { display: block; }
+  .sep { display: none; }
+
+  .field { grid-area: field; flex: none; min-height: 0; height: 200px; padding-bottom: 16px; border-bottom: 1px solid var(--rule); }
+  .word { font-size: min(21.6vw, 100cqi / 3.1); }
+
+  .body { grid-area: body; display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); }
+  .text { min-height: 0; padding: 16px 24px 20px; border-top: 0; border-right: 1px solid var(--rule); }
+  .wideOnly { display: none; }
+  .control { padding: 16px 24px 20px; }
+}
+
+/* ---------- mobile: stacked ---------- */
+@media (max-width: 639px) {
+  .title { font-size: 25.6vw; white-space: normal; }
+
+  .axis { display: flex; flex-direction: column; }
+  .axisHead {
+    flex-direction: row;
+    align-items: center;
+    height: 64px;
+    padding: 0 20px;
+    border-right: 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .tag { font-size: 44px; }
+  .range { font-size: 11px; text-align: right; }
+  .range > span:nth-child(2), .range > span:nth-child(3) { display: inline; }
+  .sep { display: inline; }
+
+  .field { height: 220px; border-bottom: 0; }
+  .word { font-size: min(30.8vw, 100cqi / 3.1); }
+
+  .body { display: flex; flex-direction: column; }
+  .text { padding: 16px 20px 0; min-height: 96px; border-top: 1px solid var(--rule); border-right: 0; }
+  .control { padding: 6px 20px 24px; }
+}

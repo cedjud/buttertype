@@ -1,0 +1,89 @@
+.norge {
+  --rule: var(--yellow);
+  background: var(--black);
+  color: var(--yellow);
+}
+
+.title { font-size: min(6.39vw, 104px); }
+.intro { color: var(--white); }
+
+.list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-bottom: 1px solid var(--rule);
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  border-right: 1px solid var(--rule);
+}
+.col:last-child { border-right: 0; }
+
+.top, .bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding: 16px var(--gutter);
+  font: 400 12px/1.5 var(--font-mono);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.top { border-bottom: 1px solid var(--rule); }
+.bottom { padding-block: 14px; border-top: 1px solid var(--rule); letter-spacing: .06em; color: var(--white); }
+
+.stage {
+  container-type: inline-size;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 0 10px;
+}
+.glyph {
+  font-size: min(25vw, 76cqi);
+  line-height: 1;
+  padding-bottom: 10px;
+}
+
+.word {
+  font-size: 34px;
+  line-height: 1;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--yellow);
+}
+
+/* ---------- tablet ---------- */
+@media (max-width: 1023px) {
+  .title { line-height: .95; }
+  .big { display: block; font-size: 15.6vw; }
+  .small { display: block; font-size: 7.3vw; white-space: nowrap; }
+  .intro { max-width: 520px; font-size: 17px; }
+
+  .top { padding: 14px 20px; font-size: 11px; }
+  .bottom { padding: 12px 20px; font-size: 10px; letter-spacing: .05em; gap: 8px; }
+  .lower { display: none; }
+  .glyph { font-size: min(30vw, 88cqi); }
+  .word { font-size: 28px; }
+}
+
+/* ---------- mobile ---------- */
+@media (max-width: 639px) {
+  .big { font-size: 23.6vw; }
+  .small { font-size: 13.8vw; white-space: normal; }
+
+  .list { grid-template-columns: 1fr; border-bottom: 0; }
+  .col { border-right: 0; border-bottom: 1px solid var(--rule); }
+  .top { align-items: center; height: 48px; padding: 0 20px; font-size: 12px; }
+  .bottom { align-items: center; height: 52px; padding: 0 20px; font-size: 12px; letter-spacing: .06em; }
+  .lower { display: inline; }
+  .stage { min-height: 380px; }
+  .glyph { font-size: min(74vw, 290px); }
+  .word { font-size: 32px; }
+}
