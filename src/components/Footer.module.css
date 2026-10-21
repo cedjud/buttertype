@@ -1,0 +1,72 @@
+.footer {
+  --rule: var(--yellow);
+  background: var(--black);
+  color: var(--yellow);
+  border-top: 1px solid var(--rule);   /* separates it from the black licence CTAs */
+}
+
+.top {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  border-bottom: 1px solid var(--rule);
+}
+.lede {
+  grid-column: span 8;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 26px var(--gutter);
+  border-right: 1px solid var(--rule);
+  font-size: 28px;
+  line-height: 1.25;
+  color: var(--white);
+}
+.placeholder {
+  font: 400 12px/1.5 var(--font-mono);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--yellow);
+}
+.label {
+  grid-column: span 4;
+  padding: 26px var(--gutter);
+  font: 400 12px/1.5 var(--font-mono);
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+
+/* "Smør" ≤ 2.77em wide: fill the width without overflowing. */
+.wordWrap {
+  container-type: inline-size;
+  padding: 24px var(--gutter) 0;
+  border-bottom: 1px solid var(--rule);
+}
+.word {
+  font-size: calc(100cqi / 2.85);
+  line-height: .95;
+  padding-bottom: .1em;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.legal {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px var(--gutter);
+  font: 400 12px/1.5 var(--font-mono);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--white);
+}
+.legal a { text-decoration: none; }
+.legal a:hover { color: var(--yellow); }
+
+@media (max-width: 1023px) {
+  .top { display: flex; flex-direction: column; }
+  .lede { border-right: 0; border-bottom: 1px solid var(--rule); font-size: 24px; }
+}
+
+@media (max-width: 639px) {
+  .lede { font-size: 20px; }
+}

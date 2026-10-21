@@ -1,0 +1,105 @@
+.specs {
+  --rule: var(--yellow);
+  background: var(--black);
+  color: var(--yellow);
+}
+
+.title { font-size: min(7.78vw, 124px); }
+
+/* ---------- metrics ---------- */
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: 0;
+  border-bottom: 1px solid var(--rule);
+}
+.metric {
+  display: flex;
+  flex-direction: column-reverse;   /* value on top, label below; dt stays first in the DOM */
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 150px;
+  padding: 18px var(--gutter);
+  border-right: 1px solid var(--rule);
+}
+.metric:last-child { border-right: 0; }
+.metricValue { margin: 0; font-size: 84px; line-height: 1; }
+.metricLabel {
+  font: 400 11px/1.5 var(--font-mono);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--white);
+}
+
+/* ---------- tables ---------- */
+.tables {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.col { min-width: 0; }
+.col:first-child { border-right: 1px solid var(--rule); }
+
+.table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  border-bottom: 1px solid var(--rule);
+  font: 400 13px/1.3 var(--font-mono);
+}
+
+.caption {
+  height: 44px;
+  padding: 0 var(--gutter);
+  display: table-caption;
+  line-height: 44px;
+  text-align: left;
+  border-bottom: 1px solid var(--rule);
+  font-size: 12px;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+
+.table th, .table td {
+  padding: 12px 8px 12px 0;
+  text-align: left;
+  font-weight: 400;
+  vertical-align: top;
+}
+.table tr > :first-child { padding-left: var(--gutter); }
+.table tr > :last-child { padding-right: var(--gutter); }
+
+.table thead th {
+  height: 40px;
+  padding-block: 0;
+  vertical-align: middle;
+  border-bottom: 1px solid var(--rule);
+  font-size: 11px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.table tbody tr { border-bottom: 1px solid var(--row-line-on-black); }
+.table tbody tr:last-child { border-bottom: 0; }
+.table tbody th, .table td { color: var(--white); }
+
+/* ---------- tablet ---------- */
+@media (max-width: 1023px) {
+  .title { font-size: 13vw; }
+  .metric { min-height: 130px; padding: 18px 24px; }
+  .metricValue { font-size: 56px; }
+
+  .tables { grid-template-columns: 1fr; }
+  .col:first-child { border-right: 0; }
+  .caption { padding: 0 24px; }
+}
+
+/* ---------- mobile ---------- */
+@media (max-width: 639px) {
+  .title { font-size: 25.6vw; }
+  .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .metric { min-height: 120px; padding: 16px 20px; border-bottom: 1px solid var(--rule); }
+  .metric:nth-child(2n) { border-right: 0; }
+  .metric:nth-child(n + 3) { border-bottom: 0; }
+  .metricValue { font-size: 52px; }
+  .caption { padding: 0 20px; }
+  .table { font-size: 12px; }
+}

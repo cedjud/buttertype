@@ -151,9 +151,19 @@
   .notMobile { display: none; }
   .onlyMobile { display: inline; }
 
-  .inspector { display: flex; }
-  .big { min-height: 300px; border-right: 0; border-bottom: 1px solid var(--rule); }
-  .bigGlyph { font-size: min(250px, 64vw); }
+  /* Unwrap the inspector so the big glyph can stick under the nav while the grid scrolls. */
+  .inspector { display: contents; }
+  .big {
+    position: sticky;
+    top: var(--nav-h);
+    z-index: 1;
+    min-height: 0;
+    height: min(300px, 34svh);
+    border-right: 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .details { border-bottom: 1px solid var(--rule); }
+  .bigGlyph { font-size: min(250px, 64vw, 28svh); }
   .name { min-height: 72px; padding: 12px 20px; font-size: 18px; }
   .code, .row, .chips { padding-inline: 20px; }
 

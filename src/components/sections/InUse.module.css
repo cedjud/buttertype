@@ -1,0 +1,218 @@
+.inuse {
+  --rule: var(--black);
+  background: var(--white);
+  color: var(--black);
+}
+
+.title { font-size: min(7.78vw, 124px); }
+
+/* "Hover" on pointer devices, "Tap" on touch. */
+.tapWord { display: none; }
+@media (hover: none) {
+  .hoverWord { display: none; }
+  .tapWord { display: inline; }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-areas:
+    "wrapper poster menu"
+    "stickers stickers stickers";
+  border-bottom: 1px solid var(--rule);
+}
+
+/* ---------- shared mockup behaviour ---------- */
+.mock {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+}
+.mock:focus-visible { outline-offset: -6px; }
+
+.w {
+  --m: var(--cold);
+  display: block;
+  transition: --m .8s cubic-bezier(.2, .8, .2, 1);
+}
+@media (hover: hover) {
+  .mock:hover .w { --m: var(--hot); }
+}
+.mock[aria-pressed="true"] .w { --m: var(--hot); }
+
+.meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font: 500 13px/1.4 var(--font-mono);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+/* ---------- butter wrapper ---------- */
+.wrapper { grid-area: wrapper; border-right: 1px solid var(--rule); }
+.wrapperBody {
+  container-type: inline-size;
+  flex: 1;
+  min-height: 560px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 32px;
+  background: var(--yellow);
+}
+.wrapperWord { font-size: 36cqi; line-height: 1; text-align: center; padding-bottom: .08em; }
+.wrapperBand {
+  height: 84px;
+  flex: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 32px;
+  background: var(--black);
+  color: var(--yellow);
+  font: 500 13px/1.4 var(--font-mono);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+/* ---------- poster ---------- */
+.poster {
+  grid-area: poster;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 32px;
+  background: var(--black);
+  color: var(--yellow);
+  border-right: 1px solid var(--rule);
+}
+.poster .meta { letter-spacing: .07em; }
+.posterLines { container-type: inline-size; display: block; width: 100%; line-height: .92; }
+.posterLines .w { white-space: nowrap; }
+.posterFoot { color: var(--white); }
+
+/* ---------- menu card ---------- */
+.menu {
+  grid-area: menu;
+  container-type: inline-size;
+  gap: 24px;
+  padding: 32px;
+  background: var(--white);
+}
+.menuTitle { font-size: 36cqi; line-height: .9; padding-bottom: .06em; }
+.menuList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-top: 16px;
+  border-top: 2px solid var(--black);
+}
+.menuItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--black);
+}
+.menuName { font-size: 34px; line-height: 1; }
+.price { font: 400 15px/1 var(--font-mono); }
+
+/* ---------- stickers ---------- */
+.stickers {
+  --sk: 164px;
+  --sk-scale: 1;
+  grid-area: stickers;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--rule);
+}
+.stickers li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 220px;
+  border-right: 1px solid var(--rule);
+}
+.stickers li:nth-child(5) { border-right: 0; }
+.narrowOnly { display: none !important; }
+
+.sticker {
+  width: var(--sk);
+  height: var(--sk);
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--black);
+  border-radius: 50%;
+  text-align: center;
+}
+.sticker .w { font-size: calc(var(--sz) * var(--sk-scale)); line-height: .95; padding: 0 10px; }
+.sticker:focus-visible { outline-offset: 3px; }
+.yellow { background: var(--yellow); color: var(--black); }
+.black { background: var(--black); color: var(--yellow); }
+.white { background: var(--white); color: var(--black); }
+.blackWhite { background: var(--black); color: var(--white); }
+
+@media (prefers-reduced-motion: reduce) {
+  .w { transition: none; }
+}
+
+/* ---------- tablet ---------- */
+@media (max-width: 1023px) {
+  .title { font-size: 12vw; white-space: nowrap; }
+  .intro { display: none; }
+
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas: "wrapper poster" "menu stickers";
+  }
+  .wrapperBody { min-height: 0; padding: 28px; }
+  .wrapperBand { height: 76px; padding: 0 28px; font-size: 12px; }
+  .wrapper, .poster { min-height: 560px; border-bottom: 1px solid var(--rule); }
+  .poster { padding: 28px; border-right: 0; }
+  .notTablet { display: none; }
+  .meta { font-size: 12px; }
+  .menu { padding: 28px; gap: 22px; border-right: 1px solid var(--rule); }
+  .menuTitle { font-size: 39cqi; }
+  .menuList { gap: 14px; padding-top: 14px; }
+  .menuName { font-size: 30px; }
+  .price { font-size: 14px; }
+
+  .stickers {
+    --sk: 136px;
+    --sk-scale: .8;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(3, minmax(0, 1fr));
+    border-top: 0;
+  }
+  .stickers li { min-height: 0; border-bottom: 1px solid var(--rule); }
+  .stickers li:nth-child(2n) { border-right: 0; }
+  .stickers li:nth-child(5) { border-right: 1px solid var(--rule); }
+  .stickers li:nth-child(n + 5) { border-bottom: 0; }
+  .narrowOnly { display: flex !important; }
+}
+
+/* ---------- mobile ---------- */
+@media (max-width: 639px) {
+  .title { font-size: 24.6vw; white-space: normal; }
+
+  .grid { grid-template-columns: 1fr; grid-template-areas: "wrapper" "poster" "menu" "stickers"; }
+  .wrapper { min-height: 470px; border-right: 0; }
+  .wrapperBody { padding: 24px 20px; }
+  .wrapperBand { height: 72px; padding: 0 20px; }
+  .poster { min-height: 580px; padding: 24px 20px; border-bottom-color: var(--yellow); }
+  .notTablet { display: inline; }
+  .menu { padding: 24px 20px; border-right: 0; border-bottom: 1px solid var(--rule); }
+  .menuTitle { font-size: 36cqi; }
+  .menuName { font-size: 32px; }
+
+  .stickers { --sk: 150px; --sk-scale: .9; }
+  .stickers li { min-height: 195px; }
+}
