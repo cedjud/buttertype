@@ -1,0 +1,162 @@
+.glyphs {
+  --rule: var(--black);
+  background: var(--white);
+  color: var(--black);
+}
+
+.title { font-size: min(7.78vw, 124px); }
+.onlyMobile { display: none; }
+
+.body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  border-bottom: 1px solid var(--rule);
+}
+
+/* ---------- inspector ---------- */
+.inspector {
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--rule);
+}
+
+.big {
+  container-type: inline-size;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--yellow);
+  border-bottom: 1px solid var(--rule);
+  overflow: clip;
+}
+.bigGlyph {
+  font-size: 81cqi;
+  line-height: 1;
+  padding-bottom: .05em;
+}
+
+.details { display: flex; flex-direction: column; flex: 1; }
+
+.name {
+  display: flex;
+  align-items: center;
+  min-height: 72px;
+  padding: 12px var(--gutter);
+  border-bottom: 1px solid var(--rule);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.15;
+}
+.code {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 52px;
+  padding: 0 var(--gutter);
+  border-bottom: 1px solid var(--rule);
+  font: 400 12px/1.5 var(--font-mono);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.row {
+  padding: 18px var(--gutter) 12px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.chips {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 72px;
+  padding: 0 var(--gutter);
+  font: 400 12px/1.5 var(--font-mono);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.chip {
+  padding: 6px 12px;
+  border: 1px solid var(--black);
+  text-transform: uppercase;
+  letter-spacing: inherit;
+}
+.chip[aria-pressed="true"] { background: var(--black); color: var(--yellow); }
+.chip:not(:disabled):hover { background: var(--yellow); color: var(--black); }
+.chip[aria-pressed="true"]:hover { background: var(--black); color: var(--yellow); }
+.chip:disabled { opacity: .35; cursor: not-allowed; }
+.chip:focus-visible { outline-offset: 2px; }
+.none { margin-left: auto; }
+
+/* ---------- glyph grid ---------- */
+.grid { min-width: 0; }
+
+.groupHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 40px;
+  padding: 0 20px;
+  background: var(--black);
+  color: var(--yellow);
+  font: 400 12px/1 var(--font-mono);
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+
+.cells {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+}
+.cell {
+  container-type: inline-size;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  background: var(--white);
+  line-height: 1;
+}
+.cell span { font-size: 55cqi; }
+.cell[aria-pressed="true"] { background: var(--yellow); }
+.cell:focus-visible { outline-offset: -3px; }
+
+/* ---------- tablet ---------- */
+@media (max-width: 1023px) {
+  .title { font-size: 13vw; }
+
+  .body { display: block; }
+  .inspector {
+    display: grid;
+    grid-template-columns: 320px minmax(0, 1fr);
+    border-right: 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .big { aspect-ratio: auto; min-height: 320px; border-bottom: 0; border-right: 1px solid var(--rule); }
+  .bigGlyph { font-size: 260px; }
+  .name { min-height: 80px; padding: 12px 24px; font-size: 19px; }
+  .code { height: 48px; padding: 0 24px; }
+  .row { padding: 16px 24px 10px; }
+  .chips { min-height: 64px; padding: 0 24px; }
+
+  .cells { grid-template-columns: repeat(8, minmax(0, 1fr)); }
+  .cell span { font-size: 54cqi; }
+}
+
+/* ---------- mobile ---------- */
+@media (max-width: 639px) {
+  .title { font-size: 25.6vw; }
+  .notMobile { display: none; }
+  .onlyMobile { display: inline; }
+
+  .inspector { display: flex; }
+  .big { min-height: 300px; border-right: 0; border-bottom: 1px solid var(--rule); }
+  .bigGlyph { font-size: min(250px, 64vw); }
+  .name { min-height: 72px; padding: 12px 20px; font-size: 18px; }
+  .code, .row, .chips { padding-inline: 20px; }
+
+  .cells { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .cell span { font-size: 51cqi; }
+}
